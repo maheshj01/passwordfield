@@ -1,4 +1,4 @@
-#  passwordfield: [^0.0.1](https://pub.dev/packages/passwordfield) 
+#  passwordfield: [^0.0.2](https://pub.dev/packages/passwordfield) 
 
 
 
@@ -11,7 +11,8 @@ A simple and easy to use flutter package to add a passwordfield to your Flutter 
 - Add the dependency
 ```
 dependencies:
-  passwordfield: ^0.1.1
+  passwordfield: ^0.0.2
+  flutter:
 ```
 - Import the package
 ```
@@ -24,6 +25,17 @@ PasswordField();
 Note : The widget must be included in a Material Widget normally in a Scaffold,Card,Drawer etc
 
 - Example
+
+```
+    PasswordField(
+        color: Colors.white,
+        inputStyle: TextStyle(
+        fontSize: 20,
+        ),
+        hintText: "Password",
+    ),
+```
+
 ```
     return Scaffold(
         backgroundColor: Colors.green,
@@ -33,7 +45,6 @@ Note : The widget must be included in a Material Widget normally in a Scaffold,C
               child: PasswordField(
                 color: Colors.white,
                 inputStyle: TextStyle(fontSize: 30),
-                textAlign: TextAlign.center,
                 hintText: "password field",
               ),
             )));
