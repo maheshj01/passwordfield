@@ -24,11 +24,15 @@ class PasswordApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.grey,
         body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Center(
               child: PasswordField(
+                hasFloatingPlaceholder: true,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5)
+                ),
                 color: Colors.white,
                 inputStyle: TextStyle(
                   fontSize: 20,

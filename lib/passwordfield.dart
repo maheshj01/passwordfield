@@ -7,6 +7,8 @@ class PasswordField extends StatefulWidget {
   //if autofocus is true keyboard pops up as soon as the widget is rendered on screen
   // defaults to false
   final bool autoFocus;
+  // Input Border for the password Field
+  final InputBorder border;
   //changes the primary color of the PasswordField
   final Color color;
   // A controller for an editable passwordfield.
@@ -29,6 +31,7 @@ class PasswordField extends StatefulWidget {
 
   PasswordField(
       {this.autoFocus = false,
+      this.border,
       this.color,
       this.controller,
       this.hasFloatingPlaceholder = false,
@@ -74,6 +77,7 @@ class PasswordFieldState extends State<PasswordField> {
         obscureText: obscureText,
         autofocus: widget.autoFocus,
         decoration: InputDecoration(
+          border: widget.border,
             hintText: widget.hasFloatingPlaceholder ? null : widget.hintText,
             hintStyle: widget.hintStyle ?? widget.inputStyle,
             counterText: '',
