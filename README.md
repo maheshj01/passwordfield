@@ -25,17 +25,27 @@ PasswordField();
 Note : The widget must be included in a Material Widget normally in a Scaffold,Card,Drawer etc
 
 - Example
-
 ```
-    PasswordField(
-        color: Colors.white,
-        inputStyle: TextStyle(
-        fontSize: 20,
-        ),
-        hintText: "Password",
-    ),
-```
-
+          PasswordField(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 2,
+                      )),
+                  suffixIconEnabled: true,
+                  hasFloatingPlaceholder: false,
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                      borderSide: BorderSide(color: Colors.white, width: 3)),
+                  color: Colors.black,
+                  inputStyle: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                  hintText: "Password",
+                ),
+```                
 ```
     return Scaffold(
         backgroundColor: Colors.green,
@@ -49,9 +59,10 @@ Note : The widget must be included in a Material Widget normally in a Scaffold,C
               ),
             )));
 ```
-more customizations to be made soon
+![](https://user-images.githubusercontent.com/31410839/64446788-54d11980-d0f7-11e9-8687-88039658e64a.gif)
 
-your welcome to contribute to this package All you need to do is 
+you are welcome to contribute to this package All you need to do is 
  - fork
  - contribute
  - send a pull request
+ - or Create Issues 
