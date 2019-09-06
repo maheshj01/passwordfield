@@ -10,3 +10,7 @@
 
 * minor changes and added support for border for the passwordfield
 
+## [0.0.4]- 06 Sep 2019
+
+* added focusedBorder and border for the passwordField that allows more fexibility to decorate the passwordfield's border- color,width,radius & style.
+* 

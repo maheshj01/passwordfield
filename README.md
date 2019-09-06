@@ -1,4 +1,4 @@
-#  passwordfield: [^0.0.3](https://pub.dev/packages/passwordfield) 
+#  passwordfield: [^0.0.4](https://pub.dev/packages/passwordfield) 
 
 
 
@@ -11,7 +11,7 @@ A simple and easy to use flutter package to add a passwordfield to your Flutter 
 - Add the dependency
 ```
 dependencies:
-  passwordfield: ^0.0.3
+  passwordfield: ^0.0.4
   flutter:
 ```
 - Import the package
