@@ -15,6 +15,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      // theme: ThemeData.dark(),
       home: PasswordApp(),
     );
   }
@@ -28,37 +29,66 @@ class PasswordApp extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-          backgroundColor: Colors.grey,
-          body: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(
-                height: 50,
+          body: ListView(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 18),
+            child: Text(
+              'PasswordField: ^0.0.5',
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: PasswordField(
+              errorMessage: 'required at least 1 letter and number 5+ chars',
+              pattern: r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$',
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                  borderSide: BorderSide(
+                    width: 2,
+                  )),
+              suffixIconEnabled: true,
+              // hasFloatingPlaceholder: true,
+              inputStyle: TextStyle(
+                fontSize: 20,
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: PasswordField(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                        width: 2,
-                      )),
-                  suffixIconEnabled: true,
-                  hasFloatingPlaceholder: false,
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
-                      borderSide: BorderSide(color: Colors.white, width: 3)),
-                  color: Colors.black,
-                  inputStyle: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                  hintText: "Password",
-                ),
-              ),
-            ],
-          )),
+              hintText: "Password",
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: PasswordField(
+              hintText: 'hold icon to see the password ',
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: PasswordField(
+              color: Colors.green,
+              hasFloatingPlaceholder: true,
+              pattern: r'.*[@$#.*].*',
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(2),
+                  borderSide: BorderSide(width: 2, color: Colors.green)),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(width: 2, color: Colors.green)),
+              errorMessage: 'must contain special character either . * @ # \$',
+            ),
+          )
+        ],
+      )),
     );
   }
 }

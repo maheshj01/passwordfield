@@ -13,4 +13,9 @@
 ## [0.0.4]- 06 Sep 2019
 
 * added focusedBorder and border for the passwordField that allows more fexibility to decorate the passwordfield's border- color,width,radius & style.
-* 
+
+## [0.0.5]- 11 Jan 2020
+
+* passwordfield now supports adding constraints on password in the form of regex pattern which is fully customisable. 
+* removed onchanged method.
+* minor improvements and changes.
