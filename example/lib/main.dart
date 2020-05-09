@@ -63,12 +63,6 @@ class PasswordApp extends StatelessWidget {
               hintText: "Password",
             ),
           ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: PasswordField(
-              hintText: 'hold icon to see the password ',
-            ),
-          ),
           SizedBox(
             height: 20,
           ),
@@ -80,13 +74,38 @@ class PasswordApp extends StatelessWidget {
               pattern: r'.*[@$#.*].*',
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(2),
-                  borderSide: BorderSide(width: 2, color: Colors.green)),
+                  borderSide: BorderSide(width: 2, color: Colors.purple)),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(width: 2, color: Colors.green)),
+                  borderSide: BorderSide(width: 2, color: Colors.purple)),
               errorMessage: 'must contain special character either . * @ # \$',
             ),
-          )
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 16),
+            child: PasswordField(
+              inputStyle: TextStyle(fontSize: 26),
+              suffixIcon: Icon(
+                Icons.smartphone,
+                color: Colors.red,
+              ),
+              textPadding: EdgeInsets.symmetric(horizontal: 20),
+              backgroundColor: Colors.blue[50],
+              backgroundBorderRadius: BorderRadius.circular(20),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: PasswordField(
+              hintText: 'hold icon to see the password ',
+            ),
+          ),
         ],
       )),
     );

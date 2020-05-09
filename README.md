@@ -30,8 +30,7 @@ Note : The widget must be included in a Material Widget normally in a Scaffold,C
 ![Screenshot from 2020-01-11 22-16-13](https://user-images.githubusercontent.com/31410839/72208800-2ca25e80-34cd-11ea-9cc2-8dd1274ff975.png)
 
 
-
-- Example          
+- Example 1         
 ```
     return Scaffold(
         backgroundColor: Colors.green,
@@ -52,7 +51,28 @@ Note : The widget must be included in a Material Widget normally in a Scaffold,C
               ),
              )));
 ```
-![Peek 2020-01-11 22-15](https://user-images.githubusercontent.com/31410839/72208790-15637100-34cd-11ea-82c8-2d8e92ac068f.gif) 
+<img src="https://user-images.githubusercontent.com/31410839/81468422-17300d80-91fd-11ea-9814-36947bf68a1b.png" width=400>
+
+- Example 2
+
+```
+      Container(
+            margin: EdgeInsets.symmetric(horizontal: 16),
+            child: PasswordField(
+              inputStyle: TextStyle(fontSize: 26),
+              suffixIcon: Icon(
+                Icons.smartphone,
+                color: Colors.red,
+              ),
+              textPadding: EdgeInsets.symmetric(horizontal: 20),
+              backgroundColor: Colors.blue[50],
+              backgroundBorderRadius: BorderRadius.circular(20),
+            ),
+          ),
+```
+
+
+<img src="https://user-images.githubusercontent.com/31410839/72208790-15637100-34cd-11ea-82c8-2d8e92ac068f.gif" width=290>        <img src="https://user-images.githubusercontent.com/31410839/81469769-8c531100-9204-11ea-85ab-47570ecadf84.png" width=350>
 
 refer: [for more examples](https://github.com/maheshmnj/passwordfield-flutter-package/example)
 
