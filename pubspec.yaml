@@ -1,7 +1,6 @@
 name: passwordfield
 description: A new Flutter package project.
 version: 0.0.6
-author: Mahesh Jamdade <maheshmn121@gmail.com>
 homepage: https://github.com/maheshmnj/passwordfield-flutter-package
 
 environment:

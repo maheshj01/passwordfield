@@ -17,5 +17,11 @@
 ## [0.0.5]- 11 Jan 2020
 
 * passwordfield now supports adding constraints on password in the form of regex pattern which is fully customisable. 
-* removed onchanged method.
+* deprecated onchanged method and can no longer be used.
 * minor improvements and changes.
+
+## [0.0.6]- 09 May 2020
+* added background property for textfield to create borderLess Passwordfield with padding for the text
+* Improved documentation and updated example
+
+
