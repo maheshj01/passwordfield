@@ -1,4 +1,4 @@
-#  passwordfield: [^0.0.5](https://pub.dev/packages/passwordfield) 
+#  passwordfield: [^0.0.6](https://pub.dev/packages/passwordfield) 
 
 
 
