@@ -1,5 +1,6 @@
 name: passwordfield
-description: A new Flutter package project.
+description: A flutter package for the most commonly required widget password textfield.made with keeping in mind the requirements of a password textfield
+
 version: 0.0.6
 homepage: https://github.com/maheshmnj/passwordfield-flutter-package
 
