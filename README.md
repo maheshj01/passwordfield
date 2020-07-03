@@ -1,4 +1,4 @@
-#  passwordfield: [^0.0.6](https://pub.dev/packages/passwordfield) 
+#  passwordfield: [^0.0.7](https://pub.dev/packages/passwordfield) 
 
 
 
@@ -11,7 +11,7 @@ A simple and easy to use flutter package to add a passwordfield to your Flutter 
 - Add the dependency
 ```
 dependencies:
-  passwordfield: ^0.0.6
+  passwordfield: ^0.0.7
   flutter:
 ```
 - Import the package
@@ -76,7 +76,6 @@ Note : The widget must be included in a Material Widget normally in a Scaffold,C
 
 refer: [for more examples](https://github.com/maheshmnj/passwordfield-flutter-package/example)
 
-
 ## features
 
 ```bool autoFocus```: if autofocus is true keyboard pops up as soon as the widget is rendered on screen defaults to false
@@ -85,32 +84,33 @@ refer: [for more examples](https://github.com/maheshmnj/passwordfield-flutter-pa
 
 ```Color color```:changes the primary color of the PasswordField
 
-```TextEditingController controller```:A controller for an editable passwordfield.
+```TextEditingController controller```: A controller for an editable passwordfield.
 
-```InputBorder errorFocusedBorder```:Input Border for the password Field when in Focus and has an error
+```InputBorder errorFocusedBorder```: Input Border for the password Field when in Focus and has an error
 
-```String errorMessage```:custom message to show if the input password does not match the pattern.
+```String errorMessage```: custom message to show if the input password does not match the pattern.
+
+```TextStyle errorStyle```: text Styling to customise the errorMessage.
 
 ```InputBorder focusedBorder```: Input Border for the password Field when in Focus
 
-```bool hasFloatingPlaceholder```:whether the placeholder can float to left top on focus
+```bool hasFloatingPlaceholder```: whether the placeholder can float to left top on focus
 
 ```final TextStyle hintStyle```: styling the hint defaults to same as inputStyle if not specified
 
 ```final String hintText```:hint to show if the placeholder is false
 
-```TextStyle inputStyle```:styling the passwordfield Text;
+```TextStyle inputStyle```: styling the passwordfield Text;
 
 ```int maxLength```: the max number of characters the password field can support
   
-``` Function onSubmit```:function triggerred when the submit button on keyboard is pressed
+``` Function onSubmit```: function triggerred when the submit button on keyboard is pressed
 
-```String pattern```:pattern for the input password
+```String pattern```: supports adding constraints to the Passwordfield by adding a regex pattern
   
-``` Icon suffixIcon```:Icon used to unhide the password when touch in Contact with the icon
+``` Icon suffixIcon```: Icon used to unhide the password when touch in Contact with the icon
   
-```bool suffixIconEnabled```:suffix Icon can be removed by setting suffixIconEnabled to false,defaults to true
-
+```bool suffixIconEnabled```: suffix Icon can be removed by setting suffixIconEnabled to false,defaults to true
 
 you are welcome to contribute to this package All you need to do is 
  - fork

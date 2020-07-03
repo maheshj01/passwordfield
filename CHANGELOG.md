@@ -24,4 +24,7 @@
 * added background property for textfield to create borderLess Passwordfield with padding for the text
 * Improved documentation and updated example
 
+## [0.0.7]- 03 July 2020
+* Added ability to add multiline error Message and style to errorMessage with proprty called errorMaxLines and errorStyle
+
 

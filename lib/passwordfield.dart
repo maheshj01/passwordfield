@@ -16,10 +16,12 @@ class PasswordField extends StatefulWidget {
       this.hintStyle,
       this.inputStyle,
       this.maxLength,
+      this.errorMaxLines,
       this.onSubmit,
       this.backgroundColor,
       this.backgroundBorderRadius,
       this.textPadding,
+      this.errorStyle,
       @deprecated this.onChanged,
       this.errorFocusedBorder,
       this.errorMessage,
@@ -72,6 +74,15 @@ class PasswordField extends StatefulWidget {
 
   /// styling the Passwordfield Text
   final TextStyle inputStyle;
+
+  /// style for the the errorMessage
+  final TextStyle errorStyle;
+
+  /// The maximum number of lines the [errorText] can occupy.
+  ///
+  /// Defaults to null, which means that the [errorText] will be limited
+  /// to a single line with [TextOverflow.ellipsis].
+  final int errorMaxLines;
 
   /// custom message to show if the input password does not match the pattern.
   final String errorMessage;
@@ -143,6 +154,8 @@ class PasswordFieldState extends State<PasswordField> {
                   errorText: snapshot.hasError
                       ? widget.errorMessage ?? snapshot.error
                       : null,
+                  errorMaxLines: widget.errorMaxLines,
+                  errorStyle: widget.errorStyle,
                   enabledBorder: widget.border,
                   focusedBorder: widget.focusedBorder,
                   hintText:
