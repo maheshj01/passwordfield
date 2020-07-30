@@ -164,7 +164,7 @@ class PasswordFieldState extends State<PasswordField> {
                   counterText: '',
                   focusedErrorBorder: widget.errorFocusedBorder,
                   hasFloatingPlaceholder: widget.hasFloatingPlaceholder,
-                  labelText: widget.hasFloatingPlaceholder ? 'Password' : null,
+                  labelText: widget.hasFloatingPlaceholder ? (widget.hintText ?? 'Password') : null,
                   suffixIcon: widget.suffixIconEnabled
                       ? GestureDetector(
                           child:
