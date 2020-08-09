@@ -12,7 +12,7 @@ class PasswordField extends StatefulWidget {
       this.color,
       this.controller,
       this.hasFloatingPlaceholder = false,
-      this.hintText = '',
+      this.hintText = 'Password',
       this.hintStyle,
       this.inputStyle,
       this.maxLength,
@@ -29,8 +29,7 @@ class PasswordField extends StatefulWidget {
       this.pattern,
       this.suffixIconEnabled = true})
       : assert((backgroundColor == null && backgroundBorderRadius == null) ||
-            (backgroundColor != null && backgroundBorderRadius != null)),
-        assert(hasFloatingPlaceholder == true && hintText == '');
+            (backgroundColor != null && backgroundBorderRadius != null));
 
   /// if autofocus is true keyboard pops up as soon as the widget is rendered on screen
   /// defaults to false
@@ -161,15 +160,12 @@ class PasswordFieldState extends State<PasswordField> {
                   errorStyle: widget.errorStyle,
                   enabledBorder: widget.border,
                   focusedBorder: widget.focusedBorder,
-                  hintText:
-                      widget.hasFloatingPlaceholder ? null : widget.hintText,
+                  hintText: widget.hasFloatingPlaceholder ? null : widget.hintText,
                   hintStyle: widget.hintStyle ?? widget.inputStyle,
                   counterText: '',
                   focusedErrorBorder: widget.errorFocusedBorder,
                   hasFloatingPlaceholder: widget.hasFloatingPlaceholder,
-                  labelText: widget.hasFloatingPlaceholder
-                      ? (widget.hintText ?? 'Password')
-                      : null,
+                  labelText: widget.hasFloatingPlaceholder ? widget.hintText : null,
                   suffixIcon: widget.suffixIconEnabled
                       ? GestureDetector(
                           child:
