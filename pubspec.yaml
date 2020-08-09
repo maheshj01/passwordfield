@@ -1,6 +1,6 @@
 name: passwordfield
 description: A simple and easy to use Passwordfield Widget to add a password Textfield to your Flutter project hassle free.
-version: 0.0.7
+version: 0.0.8
 homepage: https://github.com/maheshmnj/passwordfield-flutter-package
 
 environment:

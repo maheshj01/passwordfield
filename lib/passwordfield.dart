@@ -29,7 +29,8 @@ class PasswordField extends StatefulWidget {
       this.pattern,
       this.suffixIconEnabled = true})
       : assert((backgroundColor == null && backgroundBorderRadius == null) ||
-            (backgroundColor != null && backgroundBorderRadius != null));
+            (backgroundColor != null && backgroundBorderRadius != null)),
+        assert(hasFloatingPlaceholder == true && hintText == '');
 
   /// if autofocus is true keyboard pops up as soon as the widget is rendered on screen
   /// defaults to false
@@ -66,7 +67,9 @@ class PasswordField extends StatefulWidget {
   /// whether the placeholder can float to left top on focus
   final bool hasFloatingPlaceholder;
 
-  /// hint to show if the placeholder is false
+  ///default text to show on the passwordfield
+  /// This hint will also be shown as floating text if
+  /// [hasFloatingPlaceholder]=true and
   final String hintText;
 
   /// styling the hint defaults to same as inputStyle if not specified
@@ -164,7 +167,9 @@ class PasswordFieldState extends State<PasswordField> {
                   counterText: '',
                   focusedErrorBorder: widget.errorFocusedBorder,
                   hasFloatingPlaceholder: widget.hasFloatingPlaceholder,
-                  labelText: widget.hasFloatingPlaceholder ? (widget.hintText ?? 'Password') : null,
+                  labelText: widget.hasFloatingPlaceholder
+                      ? (widget.hintText ?? 'Password')
+                      : null,
                   suffixIcon: widget.suffixIconEnabled
                       ? GestureDetector(
                           child:
