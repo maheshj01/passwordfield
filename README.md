@@ -92,6 +92,8 @@ refer: [for more examples](https://github.com/maheshmnj/passwordfield-flutter-pa
 
 ```TextStyle errorStyle```: text Styling to customise the errorMessage.
 
+```String floatingText```: floatingText to show when floatingPlaceholder is true;
+
 ```InputBorder focusedBorder```: Input Border for the password Field when in Focus
 
 ```bool hasFloatingPlaceholder```: whether the placeholder can float to left top on focus
@@ -101,8 +103,6 @@ refer: [for more examples](https://github.com/maheshmnj/passwordfield-flutter-pa
 ```final String hintText```:hint to show if the placeholder is false
 
 ```TextStyle inputStyle```: styling the passwordfield Text;
-
-```String floatingText```: floatingText to show when floatingPlaceholder is true;
 
 ```int maxLength```: the max number of characters the password field can support
   
@@ -114,7 +114,7 @@ refer: [for more examples](https://github.com/maheshmnj/passwordfield-flutter-pa
   
 ```bool suffixIconEnabled```: suffix Icon can be removed by setting suffixIconEnabled to false,defaults to true
 
-you are welcome to contribute to this package,contribution doesnt necessarily mean sending a pull request it could be All you need to do is 
+you are welcome to contribute to this package,contribution doesnt necessarily mean sending a pull request it could be
  - pointing out bugs/issues 
  - requesting a new feature
  - improving the documentation
