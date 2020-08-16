@@ -1,4 +1,4 @@
-#  passwordfield: [^0.0.8-beta](https://pub.dev/packages/passwordfield) 
+#  passwordfield: [^0.0.82](https://pub.dev/packages/passwordfield) 
 
 
 
@@ -11,7 +11,7 @@ A simple and easy to use flutter package to add a passwordfield to your Flutter 
 - Add the dependency
 ```
 dependencies:
-  passwordfield: ^0.0.8-beta
+  passwordfield: ^0.0.82
   flutter:
 ```
 - Import the package
@@ -102,6 +102,8 @@ refer: [for more examples](https://github.com/maheshmnj/passwordfield-flutter-pa
 
 ```TextStyle inputStyle```: styling the passwordfield Text;
 
+```String floatingText```: floatingText to show when floatingPlaceholder is true;
+
 ```int maxLength```: the max number of characters the password field can support
   
 ``` Function onSubmit```: function triggerred when the submit button on keyboard is pressed
@@ -112,10 +114,8 @@ refer: [for more examples](https://github.com/maheshmnj/passwordfield-flutter-pa
   
 ```bool suffixIconEnabled```: suffix Icon can be removed by setting suffixIconEnabled to false,defaults to true
 
-you are welcome to contribute to this package All you need to do is 
- - fork
- - contribute
- - send a pull request
- - request a feature
- - or Create Issues 
- 
+you are welcome to contribute to this package,contribution doesnt necessarily mean sending a pull request it could be All you need to do is 
+ - pointing out bugs/issues 
+ - requesting a new feature
+ - improving the documentation
+ if you feel generous and confident send a PR :) 

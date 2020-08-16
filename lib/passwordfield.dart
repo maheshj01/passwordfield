@@ -12,9 +12,10 @@ class PasswordField extends StatefulWidget {
       this.color,
       this.controller,
       this.hasFloatingPlaceholder = false,
-      this.hintText = '',
+      this.hintText,
       this.hintStyle,
       this.inputStyle,
+      this.floatingText,
       this.maxLength,
       this.errorMaxLines,
       this.onSubmit,
@@ -29,8 +30,9 @@ class PasswordField extends StatefulWidget {
       this.pattern,
       this.suffixIconEnabled = true})
       : assert((backgroundColor == null && backgroundBorderRadius == null) ||
-            (backgroundColor != null && backgroundBorderRadius != null)),
-        assert(hasFloatingPlaceholder == true && hintText == '');
+            (backgroundColor != null && backgroundBorderRadius != null));
+  // assert((hasFloatingPlaceholder == true && hintText == null) ||
+  //     (hasFloatingPlaceholder == false && hintText != null));
 
   /// if autofocus is true keyboard pops up as soon as the widget is rendered on screen
   /// defaults to false
@@ -60,19 +62,30 @@ class PasswordField extends StatefulWidget {
   /// A controller for an editable passwordfield.
   final TextEditingController controller;
 
-  /// pattern for the input password
-  /// e.g r'a-zA-Z' allows only alphabets
+  /**
+   * RegEx pattern for the input password
+   *
+   *     r'[a-zA-Z]'      // 'heLLo' allows Alphabets with upper and lower case
+   *     r'[a-zA-Z]{8}'   // 'helloYou' allows Alphabetic password strict to 8 chars
+   *     r'[0-9a-zA-Z]';  // 'Hello123' allows alphanumeric password
+   *     r'[0-9]{6}'      //  '123456' allows numeric password strict to 6 characters
+   *
+   * Dart regular expressions have the same syntax and semantics 
+   * as JavaScript regular expressions. 
+   * See:[ecma-international.org/ecma-262/9.0/#sec-regexp-regular-expression-objects](ecma-international.org/ecma-262/9.0/#sec-regexp-regular-expression-objects)
+   * for the specification of JavaScript regular expressions.
+   */
   final String pattern;
 
   /// whether the placeholder can float to left top on focus
   final bool hasFloatingPlaceholder;
 
   ///default text to show on the passwordfield
-  /// This hint will also be shown as floating text if
-  /// [hasFloatingPlaceholder]=true and
+  /// This hint is hidden/does not take effect if [hasFloatingPlaceholder] = true
   final String hintText;
 
-  /// styling the hint defaults to same as inputStyle if not specified
+  /// styling fpr the the hint and the floating label,
+  /// defaults to same as inputStyle if not specified
   final TextStyle hintStyle;
 
   /// styling the Passwordfield Text
@@ -89,6 +102,16 @@ class PasswordField extends StatefulWidget {
 
   /// custom message to show if the input password does not match the pattern.
   final String errorMessage;
+
+  /// if hasFloatingPlaceholder==true
+  /// a text label floats to left top on focus
+  /// The label defaults to "Password" if not specified,
+  ///
+  /// floating text can be styled using [hintStyle]
+  ///
+  /// Note: either [floatingText]/ [hintText] can be shown at a time
+  /// that mainly depends on property [hasFloatingPlaceholder]
+  final String floatingText;
 
   /// the max number of characters the password field can support
   final int maxLength;
@@ -166,10 +189,13 @@ class PasswordFieldState extends State<PasswordField> {
                   hintStyle: widget.hintStyle ?? widget.inputStyle,
                   counterText: '',
                   focusedErrorBorder: widget.errorFocusedBorder,
-                  hasFloatingPlaceholder: widget.hasFloatingPlaceholder,
+                  floatingLabelBehavior: widget.hasFloatingPlaceholder
+                      ? FloatingLabelBehavior.auto
+                      : FloatingLabelBehavior.never,
                   labelText: widget.hasFloatingPlaceholder
-                      ? (widget.hintText ?? 'Password')
-                      : null,
+                      ? widget.floatingText ?? 'Password'
+                      : (widget.hintText ?? 'Password'),
+                  labelStyle: widget.hintStyle ?? widget.inputStyle,
                   suffixIcon: widget.suffixIconEnabled
                       ? GestureDetector(
                           child:

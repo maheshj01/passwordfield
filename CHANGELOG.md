@@ -27,7 +27,11 @@
 ## [0.0.7]- 03 July 2020
 * Added ability to add multiline error Message and style to errorMessage with proprty called errorMaxLines and errorStyle. [Issue:Feature Request](https://github.com/maheshmnj/passwordfield-flutter-package/issues/2
 ) 
-## [0.0.8-beta]- 09 August 2020
+## [0.0.81]- 09 August 2020
 * minor fixes [Issue:Fix](https://github.com/maheshmnj/passwordfield-flutter-package/issues/3)
+
+## [0.0.82]- 16 August 2020
+* add floatingText label for floating placeholder
+* improved documentation 
 
 
