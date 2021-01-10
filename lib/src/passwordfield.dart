@@ -39,28 +39,28 @@ class PasswordField extends StatefulWidget {
   final bool autoFocus;
 
   /// Input Border for the password field when not in focus
-  final InputBorder border;
+  final InputBorder? border;
 
   /// changes the primary color of the PasswordField
-  final Color color;
+  final Color? color;
 
   /// Background Color for the textfield must be specified with [backgroundBorderRadius]
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   /// Border for the textfield background must be specified with backgroundColor
-  final BorderRadiusGeometry backgroundBorderRadius;
+  final BorderRadiusGeometry? backgroundBorderRadius;
 
   /// Input Border for the password Field when in Focus
-  final InputBorder focusedBorder;
+  final InputBorder? focusedBorder;
 
   /// Input Border for the password Field when in Focus and has an error
-  final InputBorder errorFocusedBorder;
+  final InputBorder? errorFocusedBorder;
 
   /// paddint for the textfield when [backgroundBorderRadius] != null
-  final EdgeInsetsGeometry textPadding;
+  final EdgeInsetsGeometry? textPadding;
 
   /// A controller for an editable passwordfield.
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
   /**
    * RegEx pattern for the input password
@@ -75,33 +75,33 @@ class PasswordField extends StatefulWidget {
    * See:[ecma-international.org/ecma-262/9.0/#sec-regexp-regular-expression-objects](ecma-international.org/ecma-262/9.0/#sec-regexp-regular-expression-objects)
    * for the specification of JavaScript regular expressions.
    */
-  final String pattern;
+  final String? pattern;
 
   /// whether the placeholder can float to left top on focus
   final bool hasFloatingPlaceholder;
 
   ///default text to show on the passwordfield
   /// This hint is hidden/does not take effect if [hasFloatingPlaceholder] = true
-  final String hintText;
+  final String? hintText;
 
   /// styling fpr the the hint and the floating label,
   /// defaults to same as inputStyle if not specified
-  final TextStyle hintStyle;
+  final TextStyle? hintStyle;
 
   /// styling the Passwordfield Text
-  final TextStyle inputStyle;
+  final TextStyle? inputStyle;
 
   /// style for the the errorMessage
-  final TextStyle errorStyle;
+  final TextStyle? errorStyle;
 
   /// The maximum number of lines the [errorText] can occupy.
   ///
   /// Defaults to null, which means that the [errorText] will be limited
   /// to a single line with [TextOverflow.ellipsis].
-  final int errorMaxLines;
+  final int? errorMaxLines;
 
   /// custom message to show if the input password does not match the pattern.
-  final String errorMessage;
+  final String? errorMessage;
 
   /// if hasFloatingPlaceholder==true
   /// a text label floats to left top on focus
@@ -111,21 +111,21 @@ class PasswordField extends StatefulWidget {
   ///
   /// Note: either [floatingText]/ [hintText] can be shown at a time
   /// that mainly depends on property [hasFloatingPlaceholder]
-  final String floatingText;
+  final String? floatingText;
 
   /// the max number of characters the password field can support
-  final int maxLength;
+  final int? maxLength;
 
   /// function triggerred when the submit button on keyboard is pressed
-  final Function(String) onSubmit;
+  final Function(String)? onSubmit;
 
   /// A Callback function triggered when the text insude the PasswordField changes
   ///
   @deprecated
-  final Function onChanged;
+  final Function? onChanged;
 
   /// Icon used to unhide the password when touch in Contact with the icon
-  final Icon suffixIcon;
+  final Icon? suffixIcon;
 
   /// The Icon to show at the right end of the textfield, suffix Icon can be removed by setting suffixIconEnabled to false,defaults to true
   final bool suffixIconEnabled;
@@ -138,7 +138,6 @@ class PasswordField extends StatefulWidget {
 
 class PasswordFieldState extends State<PasswordField> {
   bool obscureText = true;
-//wrap your toggle icon in Gesture Detector
 
   void inContact(TapDownDetails details) {
     setState(() {
@@ -156,8 +155,7 @@ class PasswordFieldState extends State<PasswordField> {
   Widget passwordFieldWidget() {
     return Theme(
       data: ThemeData(
-          primaryColor:
-              widget.color ?? Theme.of(context).primaryColor ?? Colors.red),
+          primaryColor: widget.color ?? Theme.of(context).primaryColor),
       child: StreamBuilder<String>(
         stream: bloc.password,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -178,7 +176,7 @@ class PasswordFieldState extends State<PasswordField> {
                       ? InputBorder.none
                       : widget.border,
                   errorText: snapshot.hasError
-                      ? widget.errorMessage ?? snapshot.error
+                      ? widget.errorMessage ?? snapshot.error as String?
                       : null,
                   errorMaxLines: widget.errorMaxLines,
                   errorStyle: widget.errorStyle,

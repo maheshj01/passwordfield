@@ -38,7 +38,7 @@ class PasswordApp extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 18),
             child: Text(
-              'PasswordField: ^0.0.7',
+              'PasswordField Examples',
               style: TextStyle(fontSize: 20),
             ),
           ),
@@ -92,6 +92,7 @@ class PasswordApp extends StatelessWidget {
                 Icons.smartphone,
                 color: Colors.red,
               ),
+              border: InputBorder.none,
               textPadding: EdgeInsets.symmetric(horizontal: 20),
               backgroundColor: Colors.blue[50],
               backgroundBorderRadius: BorderRadius.circular(20),
@@ -124,7 +125,7 @@ class PasswordApp extends StatelessWidget {
                   borderSide: BorderSide(width: 2, color: Colors.purple)),
               errorStyle: TextStyle(color: Colors.green, fontSize: 18),
               errorMessage:
-                  'Add Your Custom error Message as long as you want and With your custom style with a proprty called errorStyle',
+                  'Add Your Custom error Message as long as you want and With your custom style with a property called errorStyle',
             ),
           ),
           SizedBox(

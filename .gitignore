@@ -16,3 +16,7 @@ example/.dart_tool/version
 example/.dart_tool/package_config.json
 .gitignore
 example/.dart_tool/package_config_subset
+example/build/
+example/.dart_tool
+.dart_tool/package_config.json
+example/ios/Flutter/flutter_export_environment.sh
