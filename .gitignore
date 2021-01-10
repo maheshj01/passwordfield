@@ -1,1 +1,8 @@
 .packages
+pubspec.lock
+.dart_tool/package_config_subset
+.dart_tool/package_config.json
+.dart_tool/version
+example/pubspec.lock
+pubspec.lock
+example/ios/Flutter/flutter_export_environment.sh
