@@ -6,3 +6,13 @@ pubspec.lock
 example/pubspec.lock
 pubspec.lock
 example/ios/Flutter/flutter_export_environment.sh
+example/ios/Flutter/Generated.xcconfig
+example/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+example/ios/Runner/GeneratedPluginRegistrant.h
+example/ios/Runner/GeneratedPluginRegistrant.m
+example/android/local.properties
+.gitignore
+example/.dart_tool/version
+example/.dart_tool/package_config.json
+.gitignore
+example/.dart_tool/package_config_subset
