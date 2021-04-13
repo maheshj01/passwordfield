@@ -8,6 +8,7 @@
 .buildlog/
 .history
 .svn/
+.metadata
 
 # IntelliJ related
 *.iml
@@ -28,6 +29,7 @@
 .pub-cache/
 .pub/
 /build/
+pubspec.lock
 
 # Android related
 **/android/**/gradle-wrapper.jar
