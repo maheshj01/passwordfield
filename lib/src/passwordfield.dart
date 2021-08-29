@@ -5,42 +5,32 @@ import 'package:flutter/material.dart';
 import 'package:passwordfield/src/password_bloc.dart';
 
 class PasswordField extends StatefulWidget {
-  const PasswordField(
+  PasswordField(
       {this.autoFocus = false,
       this.border,
-      this.focusedBorder,
       this.color,
       this.controller,
-      this.hasFloatingPlaceholder = false,
-      this.hintText,
-      this.hintStyle,
-      this.inputStyle,
       this.floatingText,
       this.maxLength,
       this.errorMaxLines,
       this.onSubmit,
       this.backgroundColor,
       this.backgroundBorderRadius,
-      this.contentPadding,
-      this.errorStyle,
       @deprecated this.onChanged,
-      this.errorFocusedBorder,
       this.errorMessage,
       this.suffixIcon,
       this.pattern,
       this.suffixIconEnabled = true,
       this.inputDecoration})
-      : assert((backgroundColor == null && backgroundBorderRadius == null) ||
-            (backgroundColor != null && backgroundBorderRadius != null));
+      : assert(border != null ||
+            ((backgroundColor == null && backgroundBorderRadius == null) ||
+                (backgroundColor != null && backgroundBorderRadius != null)));
   // assert((hasFloatingPlaceholder == true && hintText == null) ||
   //     (hasFloatingPlaceholder == false && hintText != null));
 
   /// if autofocus is true keyboard pops up as soon as the widget is rendered on screen
   /// defaults to false
   final bool? autoFocus;
-
-  /// Input Border for the password field when not in focus
-  final InputBorder? border;
 
   /// changes the primary color of the PasswordField
   final Color? color;
@@ -51,14 +41,8 @@ class PasswordField extends StatefulWidget {
   /// Border for the textfield background must be specified with backgroundColor
   final BorderRadiusGeometry? backgroundBorderRadius;
 
-  /// Input Border for the password Field when in Focus
-  final InputBorder? focusedBorder;
-
-  /// Input Border for the password Field when in Focus and has an error
-  final InputBorder? errorFocusedBorder;
-
-  /// content padding for the textfield
-  final EdgeInsetsGeometry? contentPadding;
+  /// Input Border for the passwordfield
+  final PasswordBorder? border;
 
   /// A controller for an editable passwordfield.
   final TextEditingController? controller;
@@ -78,22 +62,8 @@ class PasswordField extends StatefulWidget {
   ///
   final String? pattern;
 
-  /// whether the placeholder can float to left top on focus
-  final bool hasFloatingPlaceholder;
-
-  ///default text to show on the passwordfield
-  /// This hint is hidden/does not take effect if [hasFloatingPlaceholder] = true
-  final String? hintText;
-
-  /// styling fpr the the hint and the floating label,
-  /// defaults to same as inputStyle if not specified
-  final TextStyle? hintStyle;
-
-  /// styling the Passwordfield Text
-  final TextStyle? inputStyle;
-
-  /// style for the the errorMessage
-  final TextStyle? errorStyle;
+  /// decoration for the input
+  PasswordDecoration? inputDecoration;
 
   /// The maximum number of lines the [errorText] can occupy.
   ///
@@ -131,7 +101,6 @@ class PasswordField extends StatefulWidget {
   /// The Icon to show at the right end of the textfield, suffix Icon can be removed by setting suffixIconEnabled to false,defaults to true
   final bool? suffixIconEnabled;
 
-  final InputDecoration? inputDecoration;
   @override
   State createState() {
     return PasswordFieldState();
@@ -155,68 +124,127 @@ class PasswordFieldState extends State<PasswordField> {
   }
 
   PasswordBloc bloc = PasswordBloc();
-  Widget passwordFieldWidget() {
+
+  @override
+  Widget build(BuildContext context) {
+    final noneBorder = InputBorder.none;
+    final defaultTextStyle = DefaultTextStyle.of(context).style;
+    if (widget.inputDecoration?.inputStyle == null) {
+      widget.inputDecoration?.inputStyle = defaultTextStyle;
+    }
     return Theme(
       data: ThemeData(
           primaryColor: widget.color ?? Theme.of(context).primaryColor),
       child: StreamBuilder<String>(
         stream: bloc.password,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          return Container(
-            decoration: widget.backgroundColor != null
-                ? BoxDecoration(
-                    color: widget.backgroundColor,
-                    borderRadius: widget.backgroundBorderRadius)
-                : null,
-            child: TextField(
-              maxLength: widget.maxLength,
-              controller: widget.controller,
-              obscureText: obscureText,
-              autofocus: widget.autoFocus!,
-              decoration: widget.inputDecoration!.copyWith(
-                  border: widget.backgroundColor != null
-                      ? InputBorder.none
-                      : widget.border,
-                  errorText: snapshot.hasError
-                      ? widget.errorMessage ?? snapshot.error as String?
-                      : null,
-                  errorMaxLines: widget.errorMaxLines,
-                  errorStyle: widget.errorStyle,
-                  enabledBorder: widget.border,
-                  focusedBorder: widget.focusedBorder,
-                  hintText:
-                      widget.hasFloatingPlaceholder ? null : widget.hintText,
-                  hintStyle: widget.hintStyle ?? widget.inputStyle,
-                  counterText: '',
-                  focusedErrorBorder: widget.errorFocusedBorder,
-                  floatingLabelBehavior: widget.hasFloatingPlaceholder
-                      ? FloatingLabelBehavior.auto
-                      : FloatingLabelBehavior.never,
-                  labelText: widget.hasFloatingPlaceholder
-                      ? widget.floatingText ?? 'Password'
-                      : (widget.hintText ?? 'Password'),
-                  labelStyle: widget.hintStyle ?? widget.inputStyle,
-                  suffixIcon: widget.suffixIconEnabled!
-                      ? GestureDetector(
-                          child:
-                              widget.suffixIcon ?? Icon(Icons.remove_red_eye),
-                          onTapDown: inContact,
-                          onTapUp: outContact,
-                        )
-                      : null),
-              onSubmitted: widget.onSubmit,
-              style: widget.inputStyle,
-              onChanged: (text) =>
-                  bloc.onPasswordChanged(widget.pattern ?? '.*', text),
-            ),
+          return TextField(
+            maxLength: widget.maxLength,
+            controller: widget.controller,
+            obscureText: obscureText,
+            autofocus: widget.autoFocus!,
+            decoration: widget.inputDecoration == null
+                ? null
+                : widget.inputDecoration!.copyWith(
+                    contentPadding: widget.inputDecoration!.inputPadding,
+                    errorText: snapshot.hasError
+                        ? widget.errorMessage ?? snapshot.error as String?
+                        : null,
+                    errorMaxLines: widget.errorMaxLines,
+                    errorStyle: widget.inputDecoration!.errorStyle ??
+                        defaultTextStyle.copyWith(color: Colors.red),
+                    hintText: widget.inputDecoration!.hasFloatingPlaceholder
+                        ? null
+                        : widget.inputDecoration!.hintText,
+                    hintStyle: widget.inputDecoration?.hintStyle ??
+                        widget.inputDecoration?.inputStyle,
+                    labelStyle: widget.inputDecoration!.hintStyle ??
+                        widget.inputDecoration!.inputStyle,
+                    border: widget.border == null
+                        ? noneBorder
+                        : widget.border?.border,
+                    enabledBorder: widget.border == null
+                        ? noneBorder
+                        : widget.border?.enabledBorder,
+                    focusedBorder: widget.border == null
+                        ? noneBorder
+                        : widget.border?.focusedBorder,
+                    focusedErrorBorder: widget.border == null
+                        ? noneBorder
+                        : widget.border?.focusedErrorBorder,
+                    counterText: '',
+                    floatingLabelBehavior:
+                        widget.inputDecoration!.hasFloatingPlaceholder
+                            ? FloatingLabelBehavior.auto
+                            : FloatingLabelBehavior.never,
+                    labelText: widget.inputDecoration!.hasFloatingPlaceholder
+                        ? widget.floatingText ?? 'Password'
+                        : (widget.inputDecoration!.hintText ?? 'Password'),
+                    suffixIcon: widget.suffixIconEnabled!
+                        ? GestureDetector(
+                            child:
+                                widget.suffixIcon ?? Icon(Icons.remove_red_eye),
+                            onTapDown: inContact,
+                            onTapUp: outContact,
+                          )
+                        : null),
+            onSubmitted: widget.onSubmit,
+            style: widget.inputDecoration?.inputStyle,
+            onChanged: (text) =>
+                bloc.onPasswordChanged(widget.pattern ?? '.*', text),
           );
         },
       ),
     );
   }
+}
 
-  @override
-  Widget build(BuildContext context) {
-    return passwordFieldWidget();
-  }
+class PasswordDecoration extends InputDecoration {
+  PasswordDecoration(
+      {this.hasFloatingPlaceholder = false,
+      this.hintText,
+      this.hintStyle,
+      this.inputStyle,
+      this.errorStyle,
+      this.inputPadding});
+
+  /// whether the placeholder can float to left top on focus
+  final bool hasFloatingPlaceholder;
+
+  ///default text to show on the passwordfield
+  /// This hint is hidden/does not take effect if [hasFloatingPlaceholder] = true
+  final String? hintText;
+
+  /// styling fpr the the hint and the floating label,
+  /// defaults to same as inputStyle if not specified
+  final TextStyle? hintStyle;
+
+  /// styling the Passwordfield Text
+  late final TextStyle? inputStyle;
+
+  /// style for the the errorMessage
+  final TextStyle? errorStyle;
+
+  /// Input padding
+  final EdgeInsetsGeometry? inputPadding;
+}
+
+class PasswordBorder {
+  PasswordBorder(
+      {this.border,
+      this.focusedBorder,
+      this.enabledBorder,
+      this.focusedErrorBorder});
+
+  /// Input Border for the passwordfield when not in focus.
+  InputBorder? border;
+
+  ///  Input Border for the passwordfield when field is not disabled.
+  InputBorder? enabledBorder;
+
+  ///  Input Border for the passwordfield when in focus.
+  InputBorder? focusedBorder;
+
+  ///  Input Border for the passwordfield when field has error.
+  InputBorder? focusedErrorBorder;
 }

@@ -22,13 +22,10 @@ class Validation {
       handleData: (list, sink) {
     final String pattern = list[0];
     final String password = list[1];
-    // print('pattern=$pattern' +  ' $password');
     final RegExp regex = RegExp('''$pattern''');
     if (regex.hasMatch(password)) {
-      // print('match');
       sink.add(password);
     } else {
-      // print('unmatch');
       sink.addError('Invalid password format :(');
     }
   });
