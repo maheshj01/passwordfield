@@ -1,4 +1,4 @@
-#  passwordfield: [^0.0.82](https://pub.dev/packages/passwordfield) 
+#  passwordfield: [^0.1.0](https://pub.dev/packages/passwordfield) 
 
 
 
@@ -11,10 +11,10 @@ A simple and easy to use flutter package to add a passwordfield to your Flutter 
 - Add the dependency
 ```
 dependencies:
-  passwordfield: ^0.0.82
-  flutter:
+  passwordfield: ^0.1.0
 ```
 - Import the package
+
 ```
 import 'package:passwordfield/passwordfield.dart';
 ```
@@ -80,9 +80,10 @@ refer: [for more examples](https://github.com/maheshmnj/passwordfield-flutter-pa
 
 ```bool autoFocus```: if autofocus is true keyboard pops up as soon as the widget is rendered on screen defaults to false
 
-```InputBorder border```: Input Border for the password field when not in focus
+```PasswordDecoration inputDecoration```: Decoration class for the PasswordField to customize the input styling
 
-```Color color```:changes the primary color of the PasswordField
+```PasswordBorder border```:  Border class for the passwordfield which provides borders for different states of the passwordfield
+                               e.g [enabledBorder],[border], [focusedBorder], [focusedErrorBorder]
 
 ```TextEditingController controller```: A controller for an editable passwordfield.
 
