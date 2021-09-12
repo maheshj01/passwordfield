@@ -1,12 +1,13 @@
 library passwordfield;
 
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:passwordfield/src/password_bloc.dart';
 
 class PasswordField extends StatefulWidget {
   PasswordField(
-      {this.autoFocus = false,
+      {Key? key,
+      this.autoFocus = false,
       this.border,
       this.color,
       this.controller,
@@ -24,7 +25,8 @@ class PasswordField extends StatefulWidget {
       this.inputDecoration})
       : assert(border != null ||
             ((backgroundColor == null && backgroundBorderRadius == null) ||
-                (backgroundColor != null && backgroundBorderRadius != null)));
+                (backgroundColor != null && backgroundBorderRadius != null))),
+        super(key: key);
   // assert((hasFloatingPlaceholder == true && hintText == null) ||
   //     (hasFloatingPlaceholder == false && hintText != null));
 
@@ -129,9 +131,7 @@ class PasswordFieldState extends State<PasswordField> {
   Widget build(BuildContext context) {
     final noneBorder = InputBorder.none;
     final defaultTextStyle = DefaultTextStyle.of(context).style;
-    if (widget.inputDecoration?.inputStyle == null) {
-      widget.inputDecoration?.inputStyle = defaultTextStyle;
-    }
+    widget.inputDecoration?.inputStyle ??= defaultTextStyle;
     return Theme(
       data: ThemeData(
           primaryColor: widget.color ?? Theme.of(context).primaryColor),
