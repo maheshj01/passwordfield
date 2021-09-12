@@ -27,6 +27,7 @@ class PasswordField extends StatefulWidget {
             ((backgroundColor == null && backgroundBorderRadius == null) ||
                 (backgroundColor != null && backgroundBorderRadius != null))),
         super(key: key);
+
   // assert((hasFloatingPlaceholder == true && hintText == null) ||
   //     (hasFloatingPlaceholder == false && hintText != null));
 
@@ -146,6 +147,8 @@ class PasswordFieldState extends State<PasswordField> {
             decoration: widget.inputDecoration == null
                 ? null
                 : widget.inputDecoration!.copyWith(
+                    fillColor: widget.color,
+                    filled: true,
                     contentPadding: widget.inputDecoration!.inputPadding,
                     errorText: snapshot.hasError
                         ? widget.errorMessage ?? snapshot.error as String?
@@ -199,6 +202,7 @@ class PasswordFieldState extends State<PasswordField> {
   }
 }
 
+/// Decoration class for the PasswordField to customize the input styling
 class PasswordDecoration extends InputDecoration {
   PasswordDecoration(
       {this.hasFloatingPlaceholder = false,
@@ -229,6 +233,8 @@ class PasswordDecoration extends InputDecoration {
   final EdgeInsetsGeometry? inputPadding;
 }
 
+/// Consolidated Border class for the passwordfield
+/// when not in focus
 class PasswordBorder {
   PasswordBorder(
       {this.border,

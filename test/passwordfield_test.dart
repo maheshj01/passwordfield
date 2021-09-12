@@ -38,6 +38,17 @@ void main() {
       expect(find.byKey(const Key('passwordFieldKey')), findsOneWidget);
     });
 
+    testWidgets('sets initial text', (WidgetTester tester) async {
+      await tester.pumpWidget(_boilerplate(
+          child: PasswordField(
+        key: const Key('passwordFieldKey'),
+        controller: TextEditingController(text: 'password'),
+      )));
+      await tester.pump();
+      expect(find.byKey(const Key('passwordFieldKey')), findsOneWidget);
+      expect(_findText('password'), findsOneWidget);
+    });
+
     testWidgets('Widget loads with no error', (WidgetTester tester) async {
       await tester.pumpWidget(_boilerplate(
         child: PasswordField(
