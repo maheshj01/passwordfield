@@ -10,6 +10,7 @@ class PasswordField extends StatefulWidget {
       this.autoFocus = false,
       this.border,
       this.color,
+      this.hintText = 'Password',
       this.controller,
       this.floatingText,
       this.maxLength,
@@ -71,6 +72,10 @@ class PasswordField extends StatefulWidget {
   /// Defaults to null, which means that the [errorText] will be limited
   /// to a single line with [TextOverflow.ellipsis].
   final int? errorMaxLines;
+
+  ///default text to show on the passwordfield
+  /// This hint is hidden/does not take effect if [hasFloatingPlaceholder] = true
+  final String? hintText;
 
   /// custom message to show if the input password does not match the pattern.
   final String? errorMessage;
@@ -143,6 +148,7 @@ class PasswordFieldState extends State<PasswordField> {
                 onTapDown: inContact,
                 onTapUp: outContact,
               ),
+              hintText: widget.hintText,
               errorText: snapshot.hasError
                   ? widget.errorMessage ?? snapshot.error as String?
                   : null,
@@ -181,9 +187,7 @@ class PasswordFieldState extends State<PasswordField> {
                       errorMaxLines: widget.errorMaxLines,
                       errorStyle: widget.inputDecoration!.errorStyle ??
                           defaultTextStyle.copyWith(color: Colors.red),
-                      hintText: widget.inputDecoration!.hasFloatingPlaceholder
-                          ? null
-                          : widget.inputDecoration!.hintText,
+                      hintText: widget.hintText,
                       hintStyle: widget.inputDecoration?.hintStyle ??
                           widget.inputDecoration?.inputStyle,
                       labelStyle: widget.inputDecoration!.hintStyle ??
@@ -209,8 +213,8 @@ class PasswordFieldState extends State<PasswordField> {
                               ? FloatingLabelBehavior.auto
                               : FloatingLabelBehavior.never,
                       labelText: widget.inputDecoration!.hasFloatingPlaceholder
-                          ? widget.floatingText ?? 'Password'
-                          : (widget.inputDecoration!.hintText ?? 'Password'),
+                          ? widget.floatingText ?? widget.hintText
+                          : widget.hintText,
                       suffixIcon: GestureDetector(
                         child: widget.inputDecoration!.suffixIcon,
                         onTapDown: inContact,
@@ -234,7 +238,6 @@ class PasswordFieldState extends State<PasswordField> {
 class PasswordDecoration extends InputDecoration {
   PasswordDecoration(
       {this.hasFloatingPlaceholder = false,
-      this.hintText,
       this.hintStyle,
       this.inputStyle,
       this.errorStyle,
@@ -243,10 +246,6 @@ class PasswordDecoration extends InputDecoration {
 
   /// whether the placeholder can float to left top on focus
   final bool hasFloatingPlaceholder;
-
-  ///default text to show on the passwordfield
-  /// This hint is hidden/does not take effect if [hasFloatingPlaceholder] = true
-  final String? hintText;
 
   /// styling fpr the the hint and the floating label,
   /// defaults to same as inputStyle if not specified

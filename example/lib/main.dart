@@ -58,8 +58,8 @@ class PasswordApp extends StatelessWidget {
                     inputStyle: const TextStyle(
                       fontSize: 14,
                     ),
-                    hintText: 'Password',
                   ),
+                  hintText: 'Password',
                   onChanged: (x) {
                     print(x);
                   },
@@ -87,8 +87,9 @@ class PasswordApp extends StatelessWidget {
                   color: Colors.blue,
                   pattern: r'.*[@$#.*].*',
                   inputDecoration: PasswordDecoration(
-                      hasFloatingPlaceholder: true,
-                      hintText: 'must have special charachters'),
+                    hasFloatingPlaceholder: true,
+                  ),
+                  // hintText: 'must have special characters',
                   border: PasswordBorder(
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -115,17 +116,14 @@ class PasswordApp extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const SizedBox(
-                height: 20,
-              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: PasswordField(
                   backgroundColor: Colors.black.withOpacity(0.2),
                   backgroundBorderRadius: BorderRadius.circular(20),
+                  hintText: 'Password',
                   inputDecoration: PasswordDecoration(
                     inputPadding: const EdgeInsets.symmetric(horizontal: 20),
-                    hintText: 'Password',
                     // inputStyle: const TextStyle(
                     //     fontSize: 16.0, color: Color(0xFFbdc6cf)),
                   ),

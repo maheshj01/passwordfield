@@ -59,8 +59,8 @@ void main() {
             inputStyle: const TextStyle(
               fontSize: 14,
             ),
-            hintText: 'Password',
           ),
+            hintText: 'Password',
         ),
       ));
 
@@ -84,8 +84,8 @@ void main() {
           inputStyle: const TextStyle(
             fontSize: 14,
           ),
-          hintText: 'Password',
         ),
+          hintText: 'Password',
       ),
     ));
 
@@ -109,8 +109,8 @@ void main() {
           inputStyle: const TextStyle(
             fontSize: 14,
           ),
-          hintText: 'Password',
         ),
+          hintText: 'Password',
       ),
     ));
 
