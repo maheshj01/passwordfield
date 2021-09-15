@@ -61,7 +61,6 @@ void main() {
             ),
             hintText: 'Password',
           ),
-          suffixIconEnabled: true,
         ),
       ));
 
@@ -87,7 +86,6 @@ void main() {
           ),
           hintText: 'Password',
         ),
-        suffixIconEnabled: true,
       ),
     ));
 
@@ -113,7 +111,6 @@ void main() {
           ),
           hintText: 'Password',
         ),
-        suffixIconEnabled: true,
       ),
     ));
 

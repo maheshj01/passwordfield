@@ -17,19 +17,11 @@ class PasswordField extends StatefulWidget {
       this.onSubmit,
       this.backgroundColor,
       this.backgroundBorderRadius,
-      @deprecated this.onChanged,
+      this.onChanged,
       this.errorMessage,
-      this.suffixIcon,
       this.pattern,
-      this.suffixIconEnabled = true,
       this.inputDecoration})
-      : assert(border != null ||
-            ((backgroundColor == null && backgroundBorderRadius == null) ||
-                (backgroundColor != null && backgroundBorderRadius != null))),
-        super(key: key);
-
-  // assert((hasFloatingPlaceholder == true && hintText == null) ||
-  //     (hasFloatingPlaceholder == false && hintText != null));
+      : super(key: key);
 
   /// if autofocus is true keyboard pops up as soon as the widget is rendered on screen
   /// defaults to false
@@ -63,6 +55,7 @@ class PasswordField extends StatefulWidget {
   /// See:[ecma-international.org/ecma-262/9.0/#sec-regexp-regular-expression-objects](ecma-international.org/ecma-262/9.0/#sec-regexp-regular-expression-objects)
   /// for the specification of JavaScript regular expressions.
   ///
+  /// By default the patter is set to `.*` allowing any characters
   final String? pattern;
 
   /// decoration for the input
@@ -93,16 +86,9 @@ class PasswordField extends StatefulWidget {
   /// function triggerred when the submit button on keyboard is pressed
   final Function(String)? onSubmit;
 
-  /// A Callback function triggered when the text insude the PasswordField changes
+  /// A Callback function triggered when the text inside the PasswordField changes
   ///
-  @deprecated
-  final Function? onChanged;
-
-  /// Icon used to unhide the password when touch in Contact with the icon
-  final Icon? suffixIcon;
-
-  /// The Icon to show at the right end of the textfield, suffix Icon can be removed by setting suffixIconEnabled to false,defaults to true
-  final bool? suffixIconEnabled;
+  final Function(String)? onChanged;
 
   @override
   State createState() {
@@ -128,74 +114,92 @@ class PasswordFieldState extends State<PasswordField> {
 
   PasswordBloc bloc = PasswordBloc();
 
+  InputDecoration _buildDefaultInputDecoration() {
+    return InputDecoration(
+        fillColor: widget.backgroundColor,
+        filled: widget.backgroundColor != null,
+        suffixIcon: GestureDetector(
+          child: const Icon(Icons.remove_red_eye),
+          onTapDown: inContact,
+          onTapUp: outContact,
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
-    final noneBorder = InputBorder.none;
+    const underlineBorder = UnderlineInputBorder();
     final defaultTextStyle = DefaultTextStyle.of(context).style;
     widget.inputDecoration?.inputStyle ??= defaultTextStyle;
     return Theme(
       data: ThemeData(
-          primaryColor: widget.color ?? Theme.of(context).primaryColor),
+        primaryColor: widget.color ?? Theme.of(context).primaryColor,
+        colorScheme: Theme.of(context)
+            .colorScheme
+            .copyWith(primary: widget.color ?? Theme.of(context).primaryColor),
+      ),
       child: StreamBuilder<String>(
         stream: bloc.password,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return TextField(
-            maxLength: widget.maxLength,
-            controller: widget.controller,
-            obscureText: obscureText,
-            autofocus: widget.autoFocus!,
-            decoration: widget.inputDecoration == null
-                ? null
-                : widget.inputDecoration!.copyWith(
-                    fillColor: widget.color,
-                    filled: true,
-                    contentPadding: widget.inputDecoration!.inputPadding,
-                    errorText: snapshot.hasError
-                        ? widget.errorMessage ?? snapshot.error as String?
-                        : null,
-                    errorMaxLines: widget.errorMaxLines,
-                    errorStyle: widget.inputDecoration!.errorStyle ??
-                        defaultTextStyle.copyWith(color: Colors.red),
-                    hintText: widget.inputDecoration!.hasFloatingPlaceholder
-                        ? null
-                        : widget.inputDecoration!.hintText,
-                    hintStyle: widget.inputDecoration?.hintStyle ??
-                        widget.inputDecoration?.inputStyle,
-                    labelStyle: widget.inputDecoration!.hintStyle ??
-                        widget.inputDecoration!.inputStyle,
-                    border: widget.border == null
-                        ? noneBorder
-                        : widget.border?.border,
-                    enabledBorder: widget.border == null
-                        ? noneBorder
-                        : widget.border?.enabledBorder,
-                    focusedBorder: widget.border == null
-                        ? noneBorder
-                        : widget.border?.focusedBorder,
-                    focusedErrorBorder: widget.border == null
-                        ? noneBorder
-                        : widget.border?.focusedErrorBorder,
-                    counterText: '',
-                    floatingLabelBehavior:
-                        widget.inputDecoration!.hasFloatingPlaceholder
-                            ? FloatingLabelBehavior.auto
-                            : FloatingLabelBehavior.never,
-                    labelText: widget.inputDecoration!.hasFloatingPlaceholder
-                        ? widget.floatingText ?? 'Password'
-                        : (widget.inputDecoration!.hintText ?? 'Password'),
-                    suffixIcon: widget.suffixIconEnabled!
-                        ? GestureDetector(
-                            child:
-                                widget.suffixIcon ?? Icon(Icons.remove_red_eye),
-                            onTapDown: inContact,
-                            onTapUp: outContact,
-                          )
-                        : null),
-            onSubmitted: widget.onSubmit,
-            style: widget.inputDecoration?.inputStyle,
-            onChanged: (text) =>
-                bloc.onPasswordChanged(widget.pattern ?? '.*', text),
-          );
+              maxLength: widget.maxLength,
+              controller: widget.controller,
+              obscureText: obscureText,
+              autofocus: widget.autoFocus!,
+              decoration: widget.inputDecoration == null
+                  ? _buildDefaultInputDecoration()
+                  : widget.inputDecoration!.copyWith(
+                      fillColor: widget.backgroundColor,
+                      filled: widget.backgroundColor != null,
+                      contentPadding: widget.inputDecoration!.inputPadding,
+                      errorText: snapshot.hasError
+                          ? widget.errorMessage ?? snapshot.error as String?
+                          : null,
+                      errorMaxLines: widget.errorMaxLines,
+                      errorStyle: widget.inputDecoration!.errorStyle ??
+                          defaultTextStyle.copyWith(color: Colors.red),
+                      hintText: widget.inputDecoration!.hasFloatingPlaceholder
+                          ? null
+                          : widget.inputDecoration!.hintText,
+                      hintStyle: widget.inputDecoration?.hintStyle ??
+                          widget.inputDecoration?.inputStyle,
+                      labelStyle: widget.inputDecoration!.hintStyle ??
+                          widget.inputDecoration!.inputStyle,
+                      border: widget.border == null
+                          ? underlineBorder
+                          : widget.border?.border,
+                      enabledBorder: widget.border == null
+                          ? underlineBorder
+                          : widget.border?.enabledBorder,
+                      focusedBorder: widget.border == null
+                          ? underlineBorder
+                          : widget.border?.focusedBorder,
+                      focusedErrorBorder: widget.border == null
+                          ? null
+                          : widget.border?.focusedErrorBorder,
+                      errorBorder: widget.border == null
+                          ? null
+                          : widget.border!.errorBorder,
+                      counterText: '',
+                      floatingLabelBehavior:
+                          widget.inputDecoration!.hasFloatingPlaceholder
+                              ? FloatingLabelBehavior.auto
+                              : FloatingLabelBehavior.never,
+                      labelText: widget.inputDecoration!.hasFloatingPlaceholder
+                          ? widget.floatingText ?? 'Password'
+                          : (widget.inputDecoration!.hintText ?? 'Password'),
+                      suffixIcon: GestureDetector(
+                        child: widget.inputDecoration!.suffixIcon,
+                        onTapDown: inContact,
+                        onTapUp: outContact,
+                      )),
+              onSubmitted: widget.onSubmit,
+              style: widget.inputDecoration?.inputStyle,
+              onChanged: (text) {
+                bloc.onPasswordChanged(widget.pattern ?? '.*', text);
+                if (widget.onChanged != null) {
+                  widget.onChanged!(text);
+                }
+              });
         },
       ),
     );
@@ -210,7 +214,8 @@ class PasswordDecoration extends InputDecoration {
       this.hintStyle,
       this.inputStyle,
       this.errorStyle,
-      this.inputPadding});
+      this.inputPadding,
+      this.suffixIcon = const Icon(Icons.remove_red_eye)});
 
   /// whether the placeholder can float to left top on focus
   final bool hasFloatingPlaceholder;
@@ -224,13 +229,16 @@ class PasswordDecoration extends InputDecoration {
   final TextStyle? hintStyle;
 
   /// styling the Passwordfield Text
-  late final TextStyle? inputStyle;
+  TextStyle? inputStyle;
 
   /// style for the the errorMessage
   final TextStyle? errorStyle;
 
   /// Input padding
   final EdgeInsetsGeometry? inputPadding;
+
+  /// Icon used to unhide the password when touch in Contact with the icon
+  final Icon? suffixIcon;
 }
 
 /// Consolidated Border class for the passwordfield
@@ -248,9 +256,12 @@ class PasswordBorder {
   ///  Input Border for the passwordfield when field is not disabled.
   InputBorder? enabledBorder;
 
+  ///  Input Border for the passwordfield when field is unfocused and has error.
+  InputBorder? errorBorder;
+
+  ///  Input Border for the passwordfield when field is focused and has error.
+  InputBorder? focusedErrorBorder;
+
   ///  Input Border for the passwordfield when in focus.
   InputBorder? focusedBorder;
-
-  ///  Input Border for the passwordfield when field has error.
-  InputBorder? focusedErrorBorder;
 }
