@@ -70,7 +70,7 @@ Note : The widget must be included in a Material Widget normally in a Scaffold,C
       );
 ```
 
-refer: [for more examples](https://github.com/maheshmnj/passwordfield-flutter-package/example)
+### [More examples here 👈](example/lib/main.dart)
 
 ## features
 
