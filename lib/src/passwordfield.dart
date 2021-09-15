@@ -19,7 +19,7 @@ class PasswordField extends StatefulWidget {
       this.backgroundBorderRadius,
       this.onChanged,
       this.errorMessage,
-      this.pattern,
+      this.pattern = '',
       this.inputDecoration})
       : super(key: key);
 
@@ -55,8 +55,13 @@ class PasswordField extends StatefulWidget {
   /// See:[ecma-international.org/ecma-262/9.0/#sec-regexp-regular-expression-objects](ecma-international.org/ecma-262/9.0/#sec-regexp-regular-expression-objects)
   /// for the specification of JavaScript regular expressions.
   ///
-  /// By default the patter is set to `.*` allowing any characters
-  final String? pattern;
+  /// if the pattern is left empty then by default the password must contain
+  /// - A uppercase letter
+  /// - A lowercase letter
+  /// - A digit letter
+  /// - A special character
+  /// - A minimum length of 8 characters
+  final String pattern;
 
   /// decoration for the input
   PasswordDecoration? inputDecoration;
@@ -113,21 +118,10 @@ class PasswordFieldState extends State<PasswordField> {
   }
 
   PasswordBloc bloc = PasswordBloc();
-
-  InputDecoration _buildDefaultInputDecoration() {
-    return InputDecoration(
-        fillColor: widget.backgroundColor,
-        filled: widget.backgroundColor != null,
-        suffixIcon: GestureDetector(
-          child: const Icon(Icons.remove_red_eye),
-          onTapDown: inContact,
-          onTapUp: outContact,
-        ));
-  }
+  final underlineBorder = UnderlineInputBorder();
 
   @override
   Widget build(BuildContext context) {
-    const underlineBorder = UnderlineInputBorder();
     final defaultTextStyle = DefaultTextStyle.of(context).style;
     widget.inputDecoration?.inputStyle ??= defaultTextStyle;
     return Theme(
@@ -140,6 +134,36 @@ class PasswordFieldState extends State<PasswordField> {
       child: StreamBuilder<String>(
         stream: bloc.password,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
+          InputDecoration _buildDefaultInputDecoration() {
+            return InputDecoration(
+              fillColor: widget.backgroundColor,
+              filled: widget.backgroundColor != null,
+              suffixIcon: GestureDetector(
+                child: const Icon(Icons.remove_red_eye),
+                onTapDown: inContact,
+                onTapUp: outContact,
+              ),
+              errorText: snapshot.hasError
+                  ? widget.errorMessage ?? snapshot.error as String?
+                  : null,
+              errorMaxLines: widget.errorMaxLines,
+              border: widget.border == null
+                  ? underlineBorder
+                  : widget.border?.border,
+              enabledBorder: widget.border == null
+                  ? underlineBorder
+                  : widget.border?.enabledBorder,
+              focusedBorder: widget.border == null
+                  ? underlineBorder
+                  : widget.border?.focusedBorder,
+              focusedErrorBorder: widget.border == null
+                  ? null
+                  : widget.border?.focusedErrorBorder,
+              errorBorder:
+                  widget.border == null ? null : widget.border!.errorBorder,
+            );
+          }
+
           return TextField(
               maxLength: widget.maxLength,
               controller: widget.controller,
@@ -195,7 +219,7 @@ class PasswordFieldState extends State<PasswordField> {
               onSubmitted: widget.onSubmit,
               style: widget.inputDecoration?.inputStyle,
               onChanged: (text) {
-                bloc.onPasswordChanged(widget.pattern ?? '.*', text);
+                bloc.onPasswordChanged(widget.pattern, text);
                 if (widget.onChanged != null) {
                   widget.onChanged!(text);
                 }

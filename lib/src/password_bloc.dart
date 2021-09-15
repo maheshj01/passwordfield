@@ -23,10 +23,31 @@ class Validation {
     final String pattern = list[0];
     final String password = list[1];
     final RegExp regex = RegExp('''$pattern''');
-    if (regex.hasMatch(password)) {
-      sink.add(password);
+    final int minLength = 8;
+    bool hasUppercase = password.contains(new RegExp(r'[A-Z]'));
+    bool hasDigits = password.contains(new RegExp(r'[0-9]'));
+    bool hasLowercase = password.contains(new RegExp(r'[a-z]'));
+    bool hasSpecialCharacters =
+        password.contains(new RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
+    bool hasMinLength = password.length > minLength;
+
+    if (pattern.isEmpty) {
+      /// Default Pattern
+      if (hasDigits &
+          hasUppercase &
+          hasLowercase &
+          hasSpecialCharacters &
+          hasMinLength) {
+        sink.add(password);
+      } else {
+        sink.addError('Invalid password format :(');
+      }
     } else {
-      sink.addError('Invalid password format :(');
+      if (regex.hasMatch(password)) {
+        sink.add(password);
+      } else {
+        sink.addError('Invalid password format :(');
+      }
     }
   });
 }
