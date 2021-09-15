@@ -25,6 +25,11 @@ class _MyAppState extends State<MyApp> {
 }
 
 class PasswordApp extends StatelessWidget {
+  /// TODO: before release
+  /// TODO: validate floating text should work wihout hintText
+  /// TODO: run tests
+  /// TODO: Add examples in readme with gifs
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
