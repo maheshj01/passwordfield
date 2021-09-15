@@ -23,16 +23,15 @@ class Validation {
     final String pattern = list[0];
     final String password = list[1];
     final RegExp regex = RegExp('''$pattern''');
-    final int minLength = 8;
-    bool hasUppercase = password.contains(new RegExp(r'[A-Z]'));
-    bool hasDigits = password.contains(new RegExp(r'[0-9]'));
-    bool hasLowercase = password.contains(new RegExp(r'[a-z]'));
-    bool hasSpecialCharacters =
-        password.contains(new RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
-    bool hasMinLength = password.length > minLength;
+    const int minLength = 8;
+    final bool hasUppercase = password.contains(RegExp(r'[A-Z]'));
+    final bool hasDigits = password.contains(RegExp(r'[0-9]'));
+    final bool hasLowercase = password.contains(RegExp(r'[a-z]'));
+    final bool hasSpecialCharacters =
+        password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
+    final bool hasMinLength = password.length > minLength;
 
     if (pattern.isEmpty) {
-      /// Default Pattern
       if (hasDigits &
           hasUppercase &
           hasLowercase &

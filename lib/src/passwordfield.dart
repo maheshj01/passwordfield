@@ -123,7 +123,7 @@ class PasswordFieldState extends State<PasswordField> {
   }
 
   PasswordBloc bloc = PasswordBloc();
-  final underlineBorder = UnderlineInputBorder();
+  final underlineBorder = const UnderlineInputBorder();
 
   @override
   Widget build(BuildContext context) {
