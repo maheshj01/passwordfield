@@ -32,7 +32,6 @@ class PasswordApp extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-          backgroundColor: Colors.grey,
           appBar: AppBar(
             title: const Text('PasswordField Demo'),
           ),
@@ -45,16 +44,25 @@ class PasswordApp extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: PasswordField(
+                  backgroundColor: Colors.red.shade100,
                   controller: TextEditingController(text: 'password'),
                   errorMessage:
                       'required at least 1 letter and number 5+ chars',
                   pattern: r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$',
                   inputDecoration: PasswordDecoration(
+                    inputPadding: const EdgeInsets.symmetric(horizontal: 10),
+                    suffixIcon: const Icon(
+                      Icons.not_accessible,
+                      color: Colors.grey,
+                    ),
                     inputStyle: const TextStyle(
                       fontSize: 14,
                     ),
                     hintText: 'Password',
                   ),
+                  onChanged: (x) {
+                    print(x);
+                  },
                   border: PasswordBorder(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -64,12 +72,11 @@ class PasswordApp extends StatelessWidget {
                     ),
                     focusedErrorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(width: 2, color: Colors.red),
+                      borderSide:
+                          BorderSide(width: 2, color: Colors.red.shade200),
                     ),
                   ),
-                  suffixIconEnabled: true,
                 ),
-                // hasFloatingPlaceholder: true,
               ),
               const SizedBox(
                 height: 20,
@@ -77,15 +84,30 @@ class PasswordApp extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: PasswordField(
-                  color: Colors.green,
-                  // hasFloatingPlaceholder: true,
+                  color: Colors.blue,
                   pattern: r'.*[@$#.*].*',
-                  // border: OutlineInputBorder(
-                  //     borderRadius: BorderRadius.circular(2),
-                  //     borderSide: BorderSide(width: 2, color: Colors.purple)),
-                  // focusedBorder: OutlineInputBorder(
-                  //     borderRadius: BorderRadius.circular(10),
-                  //     borderSide: BorderSide(width: 2, color: Colors.purple)),
+                  inputDecoration: PasswordDecoration(
+                      hasFloatingPlaceholder: true,
+                      hintText: 'must have special charachters'),
+                  border: PasswordBorder(
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blue.shade100,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blue.shade100,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide:
+                          BorderSide(width: 2, color: Colors.red.shade200),
+                    ),
+                  ),
                   errorMessage:
                       'must contain special character either . * @ # \$',
                 ),
@@ -93,60 +115,22 @@ class PasswordApp extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              // Container(
-              //   margin: EdgeInsets.symmetric(horizontal: 16),
-              //   child: PasswordField(
-              //     inputStyle: TextStyle(fontSize: 26),
-              //     backgroundColor: Colors.blue[50],
-              //     backgroundBorderRadius: BorderRadius.circular(20),
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              // Container(
-              //   padding: const EdgeInsets.symmetric(horizontal: 16),
-              //   child: const PasswordField(
-              //     hintText: 'hold icon to see the password ',
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              // Container(
-              //   padding: const EdgeInsets.symmetric(horizontal: 16),
-              //   child: PasswordField(
-              //     color: Colors.deepPurple,
-              //     hasFloatingPlaceholder: true,
-              //     pattern: r'.*[@$#.*].*',
-              //     errorMaxLines: 3,
-              //     border: OutlineInputBorder(
-              //         borderRadius: BorderRadius.circular(2),
-              //         borderSide: const BorderSide(width: 2, color: Colors.purple)),
-              //     focusedBorder: OutlineInputBorder(
-              //         borderRadius: BorderRadius.circular(10),
-              //         borderSide: const BorderSide(width: 2, color: Colors.purple)),
-              //     errorStyle: const TextStyle(color: Colors.green, fontSize: 18),
-              //     errorMessage:
-              //         'Add Your Custom error Message as long as you want and With your custom style with a property called errorStyle',
-              //   ),
-              // ),
               const SizedBox(
                 height: 20,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: PasswordField(
-                  backgroundColor: Colors.grey,
+                  backgroundColor: Colors.black.withOpacity(0.2),
                   backgroundBorderRadius: BorderRadius.circular(20),
                   inputDecoration: PasswordDecoration(
-                    inputPadding: EdgeInsets.symmetric(horizontal: 20),
+                    inputPadding: const EdgeInsets.symmetric(horizontal: 20),
                     hintText: 'Password',
-                    inputStyle: const TextStyle(
-                        fontSize: 16.0, color: Color(0xFFbdc6cf)),
+                    // inputStyle: const TextStyle(
+                    //     fontSize: 16.0, color: Color(0xFFbdc6cf)),
                   ),
-                  suffixIcon: Icon(Icons.remove_red_eye),
-                  suffixIconEnabled: false,
+                  // pattern:
+                  //     r'^(?=.*[A-Z].*[A-Z])(?=.*[!@#\$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}\$',
                   border: PasswordBorder(
                     border: OutlineInputBorder(
                         borderSide: const BorderSide(color: Colors.grey),
