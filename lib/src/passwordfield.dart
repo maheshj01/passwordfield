@@ -5,43 +5,76 @@ import 'package:flutter/widgets.dart';
 import 'package:passwordfield/src/password_bloc.dart';
 
 class PasswordField extends StatefulWidget {
-  PasswordField(
-      {Key? key,
-      this.autoFocus = false,
-      this.border,
-      this.color,
-      this.hintText = 'Password',
-      this.controller,
-      this.floatingText,
-      this.maxLength,
-      this.errorMaxLines,
-      this.onSubmit,
-      this.backgroundColor,
-      this.backgroundBorderRadius,
-      this.onChanged,
-      this.errorMessage,
-      this.pattern = '',
-      this.inputDecoration})
-      : super(key: key);
+  PasswordField({
+    Key? key,
+    this.autoFocus = false,
+    this.backgroundColor,
+    this.border,
+    this.controller,
+    this.color,
+    this.errorMaxLines,
+    this.errorMessage,
+    this.floatingText,
+    this.hintText = 'Password',
+    this.inputDecoration,
+    this.maxLength,
+    this.onSubmit,
+    this.onChanged,
+    this.pattern = '',
+  }) : super(key: key);
 
   /// if autofocus is true keyboard pops up as soon as the widget is rendered on screen
   /// defaults to false
   final bool? autoFocus;
 
-  /// changes the primary color of the PasswordField
-  final Color? color;
-
-  /// Background Color for the textfield must be specified with [backgroundBorderRadius]
+  /// Background Color for the textfield (defaults to white)
+  /// By default the backgroundColor is based on the current [Theme].
   final Color? backgroundColor;
-
-  /// Border for the textfield background must be specified with backgroundColor
-  final BorderRadiusGeometry? backgroundBorderRadius;
 
   /// Input Border for the passwordfield
   final PasswordBorder? border;
 
   /// A controller for an editable passwordfield.
   final TextEditingController? controller;
+
+  /// changes the primary color of the PasswordField
+  final Color? color;
+
+  /// The maximum number of lines the [errorText] can occupy.
+  ///
+  /// Defaults to null, which means that the [errorText] will be limited
+  /// to a single line with [TextOverflow.ellipsis].
+  final int? errorMaxLines;
+
+  /// custom message to show if the input password does not match the pattern.
+  final String? errorMessage;
+
+  /// if hasFloatingPlaceholder==true
+  /// a text label floats to left top on focus
+  /// The label defaults to "Password" if not specified,
+  ///
+  /// floating text can be styled using [hintStyle]
+  ///
+  /// Note: either [floatingText]/ [hintText] can be shown at a time
+  /// that mainly depends on property [hasFloatingPlaceholder]
+  final String? floatingText;
+
+  ///default text to show on the passwordfield
+  /// This hint is hidden/does not take effect if [hasFloatingPlaceholder] = true
+  final String? hintText;
+
+  /// the max number of characters the password field can support
+  final int? maxLength;
+
+  /// function triggerred when the submit button on keyboard is pressed
+  final Function(String)? onSubmit;
+
+  /// A Callback function triggered when the text inside the PasswordField changes
+  ///
+  final Function(String)? onChanged;
+
+  /// decoration for the input
+  PasswordDecoration? inputDecoration;
 
   ///
   /// RegEx pattern for the input password
@@ -64,46 +97,8 @@ class PasswordField extends StatefulWidget {
   /// - A minimum length of 8 characters
   final String pattern;
 
-  /// decoration for the input
-  PasswordDecoration? inputDecoration;
-
-  /// The maximum number of lines the [errorText] can occupy.
-  ///
-  /// Defaults to null, which means that the [errorText] will be limited
-  /// to a single line with [TextOverflow.ellipsis].
-  final int? errorMaxLines;
-
-  ///default text to show on the passwordfield
-  /// This hint is hidden/does not take effect if [hasFloatingPlaceholder] = true
-  final String? hintText;
-
-  /// custom message to show if the input password does not match the pattern.
-  final String? errorMessage;
-
-  /// if hasFloatingPlaceholder==true
-  /// a text label floats to left top on focus
-  /// The label defaults to "Password" if not specified,
-  ///
-  /// floating text can be styled using [hintStyle]
-  ///
-  /// Note: either [floatingText]/ [hintText] can be shown at a time
-  /// that mainly depends on property [hasFloatingPlaceholder]
-  final String? floatingText;
-
-  /// the max number of characters the password field can support
-  final int? maxLength;
-
-  /// function triggerred when the submit button on keyboard is pressed
-  final Function(String)? onSubmit;
-
-  /// A Callback function triggered when the text inside the PasswordField changes
-  ///
-  final Function(String)? onChanged;
-
   @override
-  State createState() {
-    return PasswordFieldState();
-  }
+  State createState() => PasswordFieldState();
 }
 
 class PasswordFieldState extends State<PasswordField> {

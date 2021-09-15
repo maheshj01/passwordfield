@@ -120,7 +120,6 @@ class PasswordApp extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: PasswordField(
                   backgroundColor: Colors.black.withOpacity(0.2),
-                  backgroundBorderRadius: BorderRadius.circular(20),
                   hintText: 'Password',
                   inputDecoration: PasswordDecoration(
                     inputPadding: const EdgeInsets.symmetric(horizontal: 20),
