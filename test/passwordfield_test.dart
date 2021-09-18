@@ -60,7 +60,7 @@ void main() {
               fontSize: 14,
             ),
           ),
-            hintText: 'Password',
+          hintText: 'Password',
         ),
       ));
 
@@ -85,7 +85,7 @@ void main() {
             fontSize: 14,
           ),
         ),
-          hintText: 'Password',
+        hintText: 'Password',
       ),
     ));
 
@@ -110,7 +110,7 @@ void main() {
             fontSize: 14,
           ),
         ),
-          hintText: 'Password',
+        hintText: 'Password',
       ),
     ));
 
@@ -121,5 +121,25 @@ void main() {
     await tester.pump();
     expect(validText, findsOneWidget);
     expect(errorFinder, findsNothing);
+  });
+
+  testWidgets('floatingPlaceholder must have a floating text',
+      (WidgetTester tester) async {
+    Widget passwordWidget() => PasswordField(
+          key: const Key('passwordFieldKey'),
+          errorMessage: errorMessage,
+          pattern: regexpattern,
+          inputDecoration: PasswordDecoration(
+            inputStyle: const TextStyle(
+              fontSize: 14,
+            ),
+          ),
+          hintText: 'Password',
+          floatingText: '',
+          hasFloatingPlaceholder: true,
+        );
+
+    await tester.pump();
+    expect(() => passwordWidget(), throwsAssertionError);
   });
 }

@@ -14,14 +14,19 @@ class PasswordField extends StatefulWidget {
     this.color,
     this.errorMaxLines,
     this.errorMessage,
-    this.floatingText,
+    this.hasFloatingPlaceholder = false,
+    this.floatingText = 'Password',
     this.hintText = 'Password',
     this.inputDecoration,
     this.maxLength,
     this.onSubmit,
     this.onChanged,
     this.pattern = '',
-  }) : super(key: key);
+  })  : assert(
+            (hasFloatingPlaceholder == true && floatingText!.isNotEmpty) ||
+                hasFloatingPlaceholder == false,
+            'FloatingText cannot be null or empty when hasFloatingPlaceholder is true'),
+        super(key: key);
 
   /// if autofocus is true keyboard pops up as soon as the widget is rendered on screen
   /// defaults to false
@@ -59,6 +64,9 @@ class PasswordField extends StatefulWidget {
   /// that mainly depends on property [hasFloatingPlaceholder]
   final String? floatingText;
 
+  /// whether the placeholder can float to left top on focus
+  final bool hasFloatingPlaceholder;
+
   ///default text to show on the passwordfield
   /// This hint is hidden/does not take effect if [hasFloatingPlaceholder] = true
   final String? hintText;
@@ -84,17 +92,17 @@ class PasswordField extends StatefulWidget {
   ///     r'[0-9a-zA-Z]';  // 'Hello123' allows alphanumeric password
   ///     r'[0-9]{6}'      //  '123456' allows numeric password strict to 6 characters
   ///
+  /// if the pattern is not specified then by default the password must satisfy
+  /// - A uppercase letter
+  /// - A lowercase letter
+  /// - A digit
+  /// - A special character
+  /// - A minimum length of 8 characters
   /// Dart regular expressions have the same syntax and semantics
   /// as JavaScript regular expressions.
   /// See:[ecma-international.org/ecma-262/9.0/#sec-regexp-regular-expression-objects](ecma-international.org/ecma-262/9.0/#sec-regexp-regular-expression-objects)
   /// for the specification of JavaScript regular expressions.
   ///
-  /// if the pattern is left empty then by default the password must contain
-  /// - A uppercase letter
-  /// - A lowercase letter
-  /// - A digit letter
-  /// - A special character
-  /// - A minimum length of 8 characters
   final String pattern;
 
   @override
@@ -136,33 +144,35 @@ class PasswordFieldState extends State<PasswordField> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           InputDecoration _buildDefaultInputDecoration() {
             return InputDecoration(
-              fillColor: widget.backgroundColor,
-              filled: widget.backgroundColor != null,
-              suffixIcon: GestureDetector(
-                child: const Icon(Icons.remove_red_eye),
-                onTapDown: inContact,
-                onTapUp: outContact,
-              ),
-              hintText: widget.hintText,
-              errorText: snapshot.hasError
-                  ? widget.errorMessage ?? snapshot.error as String?
-                  : null,
-              errorMaxLines: widget.errorMaxLines,
-              border: widget.border == null
-                  ? underlineBorder
-                  : widget.border?.border,
-              enabledBorder: widget.border == null
-                  ? underlineBorder
-                  : widget.border?.enabledBorder,
-              focusedBorder: widget.border == null
-                  ? underlineBorder
-                  : widget.border?.focusedBorder,
-              focusedErrorBorder: widget.border == null
-                  ? null
-                  : widget.border?.focusedErrorBorder,
-              errorBorder:
-                  widget.border == null ? null : widget.border!.errorBorder,
-            );
+                fillColor: widget.backgroundColor,
+                filled: widget.backgroundColor != null,
+                suffixIcon: GestureDetector(
+                  child: const Icon(Icons.remove_red_eye),
+                  onTapDown: inContact,
+                  onTapUp: outContact,
+                ),
+                hintText: widget.hintText,
+                errorText: snapshot.hasError
+                    ? widget.errorMessage ?? snapshot.error as String?
+                    : null,
+                errorMaxLines: widget.errorMaxLines,
+                border: widget.border == null
+                    ? underlineBorder
+                    : widget.border?.border,
+                enabledBorder: widget.border == null
+                    ? underlineBorder
+                    : widget.border?.enabledBorder,
+                focusedBorder: widget.border == null
+                    ? underlineBorder
+                    : widget.border?.focusedBorder,
+                focusedErrorBorder: widget.border == null
+                    ? null
+                    : widget.border?.focusedErrorBorder,
+                errorBorder:
+                    widget.border == null ? null : widget.border!.errorBorder,
+                floatingLabelBehavior: widget.hasFloatingPlaceholder
+                    ? FloatingLabelBehavior.auto
+                    : FloatingLabelBehavior.never);
           }
 
           return TextField(
@@ -203,11 +213,10 @@ class PasswordFieldState extends State<PasswordField> {
                           ? null
                           : widget.border!.errorBorder,
                       counterText: '',
-                      floatingLabelBehavior:
-                          widget.inputDecoration!.hasFloatingPlaceholder
-                              ? FloatingLabelBehavior.auto
-                              : FloatingLabelBehavior.never,
-                      labelText: widget.inputDecoration!.hasFloatingPlaceholder
+                      floatingLabelBehavior: widget.hasFloatingPlaceholder
+                          ? FloatingLabelBehavior.auto
+                          : FloatingLabelBehavior.never,
+                      labelText: widget.hasFloatingPlaceholder
                           ? widget.floatingText ?? widget.hintText
                           : widget.hintText,
                       suffixIcon: GestureDetector(
@@ -232,15 +241,11 @@ class PasswordFieldState extends State<PasswordField> {
 /// Decoration class for the PasswordField to customize the input styling
 class PasswordDecoration extends InputDecoration {
   PasswordDecoration(
-      {this.hasFloatingPlaceholder = false,
-      this.hintStyle,
+      {this.hintStyle,
       this.inputStyle,
       this.errorStyle,
       this.inputPadding,
       this.suffixIcon = const Icon(Icons.remove_red_eye)});
-
-  /// whether the placeholder can float to left top on focus
-  final bool hasFloatingPlaceholder;
 
   /// styling fpr the the hint and the floating label,
   /// defaults to same as inputStyle if not specified
