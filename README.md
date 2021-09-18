@@ -22,46 +22,111 @@ import 'package:passwordfield/passwordfield.dart';
 ```
 PasswordField();
 ```
-Note : The widget must be included in a Material Widget normally in a Scaffold,Card,Drawer etc
-
 
 ## Now Supports adding constraints on the Password 
 
 ![Screenshot from 2020-01-11 22-16-13](https://user-images.githubusercontent.com/31410839/72208800-2ca25e80-34cd-11ea-9cc2-8dd1274ff975.png)
 
 
-- Example 1         
+
+<table>
+<tr>
+<th>Example 1</th>
+<th>Output</th>
+</tr>
+<tr>
+<td>
+
 ```dart
-    return Scaffold(
-        backgroundColor: Colors.green,
-        body: PasswordField(
-                color: Colors.blue,
-                pattern: r'.*[@$#.*].*',
-                inputDecoration: PasswordDecoration(),
-                hintText: 'must have special characters',
-                border: PasswordBorder(
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                    color: Colors.blue.shade100,
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.blue.shade100,
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide:
-                    BorderSide(width: 2, color: Colors.red.shade200),
-                  ),
-                ),
-                errorMessage:'must contain special character either . * @ # \$',
-              ),
-      );
+PasswordField(
+  color: Colors.blue,
+  pattern: r'.*[@$#.*].*',
+  inputDecoration: PasswordDecoration(),
+  hintText: 'must have special characters',
+  border: PasswordBorder(
+    border: OutlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.blue.shade100,
+      ),
+      borderRadius: BorderRadius.circular(12),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.blue.shade100,
+      ),
+      borderRadius: BorderRadius.circular(12),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide:
+          BorderSide(width: 2, color: Colors.red.shade200),
+    ),
+  ),
+  errorMessage:
+      'must contain special character either . * @ # \$',
+),
 ```
+
+</td>
+<td>
+
+![Screen-Recording-2021-09-18-at-9](https://user-images.githubusercontent.com/31410839/133895843-3c8044d7-6829-4618-b983-305668b19d79.gif)
+
+
+</td>
+</tr>
+</table>
+
+
+
+<table>
+<tr>
+<th>Example 2</th>
+<th>Output</th>
+</tr>
+<tr>
+<td>      
+
+```dart
+PasswordField(
+  backgroundColor: Colors.blue.withOpacity(0.2),
+  errorMessage: '''
+- A uppercase letter
+- A lowercase letter
+- A digit
+- A special character
+- A minimum length of 8 characters
+ ''',
+  hintText: 'Default password constraint ',
+  inputDecoration: PasswordDecoration(
+    inputPadding: const EdgeInsets.symmetric(horizontal: 20),
+  ),
+  border: PasswordBorder(
+    border: OutlineInputBorder(
+        borderSide:
+            const BorderSide(width: 0, color: Colors.grey),
+        borderRadius: BorderRadius.circular(25.7)),
+    focusedBorder: OutlineInputBorder(
+      borderSide:
+          const BorderSide(width: 0, color: Colors.grey),
+      borderRadius: BorderRadius.circular(25.7),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderSide:
+          const BorderSide(width: 0, color: Colors.grey),
+      borderRadius: BorderRadius.circular(25.7),
+    ),
+  ),
+),
+```
+</td>
+<td>
+
+![Screen-Recording-2021-09-18-at-1](https://user-images.githubusercontent.com/31410839/133895898-76fc11b7-3a6b-45dc-bbe6-637e971471f1.gif)
+
+</td>
+</tr>
+</table>
 
 ### [More examples here 👈](example/lib/main.dart)
 

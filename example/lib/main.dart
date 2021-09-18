@@ -25,9 +25,6 @@ class _MyAppState extends State<MyApp> {
 }
 
 class PasswordApp extends StatelessWidget {
-  /// TODO: before release
-  /// TODO: validate floating text should work wihout hintText
-  /// TODO: run tests
   /// TODO: Add examples in readme with gifs
 
   @override
@@ -86,14 +83,12 @@ class PasswordApp extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Container(
+              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: PasswordField(
                   color: Colors.blue,
                   pattern: r'.*[@$#.*].*',
-                  inputDecoration: PasswordDecoration(
-                    hasFloatingPlaceholder: true,
-                  ),
+                  inputDecoration: PasswordDecoration(),
                   // hintText: 'must have special characters',
                   border: PasswordBorder(
                     border: OutlineInputBorder(
@@ -124,30 +119,36 @@ class PasswordApp extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: PasswordField(
-                  backgroundColor: Colors.black.withOpacity(0.2),
-                  hintText: 'Password',
+                  backgroundColor: Colors.blue.withOpacity(0.2),
+                  errorMessage: '''
+- A uppercase letter
+- A lowercase letter
+- A digit
+- A special character
+- A minimum length of 8 characters
+                 ''',
+                  hintText: 'Default password constraint ',
                   inputDecoration: PasswordDecoration(
                     inputPadding: const EdgeInsets.symmetric(horizontal: 20),
-                    // inputStyle: const TextStyle(
-                    //     fontSize: 16.0, color: Color(0xFFbdc6cf)),
                   ),
-                  // pattern:
-                  //     r'^(?=.*[A-Z].*[A-Z])(?=.*[!@#\$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}\$',
                   border: PasswordBorder(
                     border: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.grey),
+                        borderSide:
+                            const BorderSide(width: 0, color: Colors.grey),
                         borderRadius: BorderRadius.circular(25.7)),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.grey),
+                      borderSide:
+                          const BorderSide(width: 0, color: Colors.grey),
                       borderRadius: BorderRadius.circular(25.7),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.grey),
+                      borderSide:
+                          const BorderSide(width: 0, color: Colors.grey),
                       borderRadius: BorderRadius.circular(25.7),
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           )),
     );
