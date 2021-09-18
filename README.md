@@ -130,7 +130,7 @@ PasswordField(
 
 ### [More examples here 👈](example/lib/main.dart)
 
-## features
+## Properties
 
 ```bool autoFocus```: if autofocus is true keyboard pops up as soon as the widget is rendered on screen defaults to false
 
