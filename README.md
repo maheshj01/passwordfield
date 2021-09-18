@@ -35,38 +35,31 @@ Note : The widget must be included in a Material Widget normally in a Scaffold,C
     return Scaffold(
         backgroundColor: Colors.green,
         body: PasswordField(
-                backgroundColor: Colors.red.shade100,
-                controller: TextEditingController(text: 'password'),
-                errorMessage:'required at least 1 letter and number 5+ chars',
-                pattern: r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$',
-                inputDecoration: PasswordDecoration(
-                  inputPadding: const EdgeInsets.symmetric(horizontal: 10),
-                  suffixIcon: const Icon(
-                    Icons.not_accessible,
-                    color: Colors.grey,
-                  ),
-                  inputStyle: const TextStyle(
-                    fontSize: 14,
-                  ),
-                ),
-                hintText: 'Password',
-                onChanged: (x) {
-                  print(x);
-                },
+                color: Colors.blue,
+                pattern: r'.*[@$#.*].*',
+                inputDecoration: PasswordDecoration(),
+                hintText: 'must have special characters',
                 border: PasswordBorder(
                   border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                    color: Colors.blue.shade100,
+                  ),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.blue.shade100,
+                  ),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 focusedErrorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide:
-                  BorderSide(width: 2, color: Colors.red.shade200),
+                    BorderSide(width: 2, color: Colors.red.shade200),
+                  ),
                 ),
+                errorMessage:'must contain special character either . * @ # \$',
               ),
-            ),
       );
 ```
 
@@ -100,8 +93,4 @@ Note : The widget must be included in a Material Widget normally in a Scaffold,C
 
 ```String pattern```: supports adding constraints to the Passwordfield by adding a regex pattern
   
-you are welcome to contribute to this package,contribution doesnt necessarily mean sending a pull request it could be
- - pointing out bugs/issues 
- - requesting a new feature
- - improving the documentation
- if you feel generous and confident send a PR :) 
+You are welcome to contribute to this package, to contribute please read the [contributing guidelines](CONTRIBUTING.md).
