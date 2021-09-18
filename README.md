@@ -146,7 +146,7 @@ PasswordField(
 
 ```String floatingText```: floatingText to show when floatingPlaceholder is true
 
-```hasFloatingPlaceholder`: whether the placeholder can float to left top on focus, defaults to false
+```hasFloatingPlaceholder```: whether the placeholder can float to left top on focus, defaults to false
 
 ```final String hintText```:  default text to show on the passwordfield when it is empty
 
