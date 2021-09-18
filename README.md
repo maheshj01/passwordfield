@@ -40,7 +40,7 @@ PasswordField();
 ```dart
 PasswordField(
   color: Colors.blue,
-  pattern: r'.*[@$#.*].*',
+  passwordConstraint: r'.*[@$#.*].*',
   inputDecoration: PasswordDecoration(),
   hintText: 'must have special characters',
   border: PasswordBorder(
@@ -146,7 +146,9 @@ PasswordField(
 
 ```String floatingText```: floatingText to show when floatingPlaceholder is true
 
-```final String hintText```:hint to show if the placeholder is false
+```hasFloatingPlaceholder`: whether the placeholder can float to left top on focus, defaults to false
+
+```final String hintText```:  default text to show on the passwordfield when it is empty
 
 ```PasswordDecoration inputDecoration```: Decoration class for the PasswordField to customize the input styling
 
@@ -156,6 +158,6 @@ PasswordField(
 
 ```Function onChanged```: function triggerred when the password is changed in the passwordfield
 
-```String pattern```: supports adding constraints to the Passwordfield by adding a regex pattern
+```String passwordConstraint```: supports adding constraints to the Passwordfield by adding a regex pattern
   
 You are welcome to contribute to this package, to contribute please read the [contributing guidelines](CONTRIBUTING.md).
