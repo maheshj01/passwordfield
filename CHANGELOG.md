@@ -1,4 +1,4 @@
-## [0.1.0]- 29 August 2021
+## [0.1.0]- 18 September 2021
 
 * Migrate to [sound null-safety](https://dart.dev/null-safety)
 * [Breaking changes] 
