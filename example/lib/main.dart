@@ -25,8 +25,6 @@ class _MyAppState extends State<MyApp> {
 }
 
 class PasswordApp extends StatelessWidget {
-  /// TODO: Add examples in readme with gifs
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
