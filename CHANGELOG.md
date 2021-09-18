@@ -1,7 +1,11 @@
 ## [0.1.0]- 29 August 2021
 
 * Migrate to [sound null-safety](https://dart.dev/null-safety)
-* breaking changes for style and border api
+* [Breaking changes] 
+  - separated the decoration and border apis, please check the readme for updated api changes
+  - renamed `pattern` to `passwordConstraint`
+* `onChanged` callback was added back 
+
 
 ## [0.0.82]- 16 August 2020
 
