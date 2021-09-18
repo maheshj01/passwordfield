@@ -142,4 +142,35 @@ void main() {
     await tester.pump();
     expect(() => passwordWidget(), throwsAssertionError);
   });
+
+  testWidgets('Must satisfy max length constraint',
+      (WidgetTester tester) async {
+    final controller = TextEditingController();
+    const int maxLength = 10;
+
+    Widget passwordWidget() => PasswordField(
+          key: const Key('passwordFieldKey'),
+          errorMessage: errorMessage,
+          maxLength: maxLength,
+          passwordConstraint: regexpattern,
+          controller: controller,
+          inputDecoration: PasswordDecoration(
+            inputStyle: const TextStyle(
+              fontSize: 14,
+            ),
+          ),
+          hintText: 'Password',
+        );
+
+    await tester.pumpWidget(_boilerplate(
+      child: passwordWidget(),
+    ));
+
+    final field = find.byKey(const Key('passwordFieldKey'));
+    await tester.enterText(field, 'morethan10characters');
+
+    /// greater than 10 characters
+    await tester.pumpAndSettle();
+    expect(controller.text.length, maxLength);
+  });
 }
