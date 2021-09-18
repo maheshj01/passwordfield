@@ -14,14 +14,14 @@ class PasswordField extends StatefulWidget {
     this.color,
     this.errorMaxLines,
     this.errorMessage,
-    this.hasFloatingPlaceholder = false,
     this.floatingText = 'Password',
+    this.hasFloatingPlaceholder = false,
     this.hintText = 'Password',
     this.inputDecoration,
     this.maxLength,
     this.onSubmit,
     this.onChanged,
-    this.pattern = '',
+    this.passwordConstraint = '',
   })  : assert(
             (hasFloatingPlaceholder == true && floatingText!.isNotEmpty) ||
                 hasFloatingPlaceholder == false,
@@ -64,11 +64,10 @@ class PasswordField extends StatefulWidget {
   /// that mainly depends on property [hasFloatingPlaceholder]
   final String? floatingText;
 
-  /// whether the placeholder can float to left top on focus
+  /// whether the placeholder can float to left top on focus, defaults to false
   final bool hasFloatingPlaceholder;
 
-  ///default text to show on the passwordfield
-  /// This hint is hidden/does not take effect if [hasFloatingPlaceholder] = true
+  ///default text to show on the passwordfield when it is empty
   final String? hintText;
 
   /// the max number of characters the password field can support
@@ -103,7 +102,7 @@ class PasswordField extends StatefulWidget {
   /// See:[ecma-international.org/ecma-262/9.0/#sec-regexp-regular-expression-objects](ecma-international.org/ecma-262/9.0/#sec-regexp-regular-expression-objects)
   /// for the specification of JavaScript regular expressions.
   ///
-  final String pattern;
+  final String passwordConstraint;
 
   @override
   State createState() => PasswordFieldState();
@@ -227,7 +226,7 @@ class PasswordFieldState extends State<PasswordField> {
               onSubmitted: widget.onSubmit,
               style: widget.inputDecoration?.inputStyle,
               onChanged: (text) {
-                bloc.onPasswordChanged(widget.pattern, text);
+                bloc.onPasswordChanged(widget.passwordConstraint, text);
                 if (widget.onChanged != null) {
                   widget.onChanged!(text);
                 }

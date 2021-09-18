@@ -54,7 +54,7 @@ void main() {
         child: PasswordField(
           key: const Key('passwordFieldKey'),
           errorMessage: errorMessage,
-          pattern: regexpattern,
+          passwordConstraint: regexpattern,
           inputDecoration: PasswordDecoration(
             inputStyle: const TextStyle(
               fontSize: 14,
@@ -79,7 +79,7 @@ void main() {
       child: PasswordField(
         key: const Key('passwordFieldKey'),
         errorMessage: errorMessage,
-        pattern: regexpattern,
+        passwordConstraint: regexpattern,
         inputDecoration: PasswordDecoration(
           inputStyle: const TextStyle(
             fontSize: 14,
@@ -104,7 +104,7 @@ void main() {
       child: PasswordField(
         key: const Key('passwordFieldKey'),
         errorMessage: errorMessage,
-        pattern: regexpattern,
+        passwordConstraint: regexpattern,
         inputDecoration: PasswordDecoration(
           inputStyle: const TextStyle(
             fontSize: 14,
@@ -128,7 +128,7 @@ void main() {
     Widget passwordWidget() => PasswordField(
           key: const Key('passwordFieldKey'),
           errorMessage: errorMessage,
-          pattern: regexpattern,
+          passwordConstraint: regexpattern,
           inputDecoration: PasswordDecoration(
             inputStyle: const TextStyle(
               fontSize: 14,

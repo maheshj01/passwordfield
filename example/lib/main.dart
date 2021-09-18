@@ -50,7 +50,7 @@ class PasswordApp extends StatelessWidget {
                   controller: TextEditingController(text: 'password'),
                   errorMessage:
                       'required at least 1 letter and number 5+ chars',
-                  pattern: r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$',
+                  passwordConstraint: r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$',
                   inputDecoration: PasswordDecoration(
                     inputPadding: const EdgeInsets.symmetric(horizontal: 10),
                     suffixIcon: const Icon(
@@ -87,7 +87,7 @@ class PasswordApp extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: PasswordField(
                   color: Colors.blue,
-                  pattern: r'.*[@$#.*].*',
+                  passwordConstraint: r'.*[@$#.*].*',
                   inputDecoration: PasswordDecoration(),
                   // hintText: 'must have special characters',
                   border: PasswordBorder(
