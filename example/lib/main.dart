@@ -13,12 +13,32 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final themeData = ThemeData(
+        primarySwatch: Colors.blueGrey,
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: Colors.white54,
+          focusColor: Colors.blue,
+          border: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.transparent),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.transparent),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: theme.colorScheme.primary),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          contentPadding:
+              const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+        ));
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          primaryColor: Colors.red,
-          colorScheme:
-              ThemeData.light().colorScheme.copyWith(primary: Colors.red)),
+      theme: themeData,
       home: PasswordApp(),
     );
   }
@@ -49,33 +69,10 @@ class PasswordApp extends StatelessWidget {
                   errorMessage:
                       'required at least 1 letter and number 5+ chars',
                   passwordConstraint: r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$',
-                  inputDecoration: PasswordDecoration(
-                    inputPadding: const EdgeInsets.symmetric(horizontal: 10),
-                    suffixIcon: const Icon(
-                      Icons.not_accessible,
-                      color: Colors.grey,
-                    ),
-                    inputStyle: const TextStyle(
-                      fontSize: 14,
-                    ),
-                  ),
                   hintText: 'Password',
                   onChanged: (x) {
                     print(x);
                   },
-                  border: PasswordBorder(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide:
-                          BorderSide(width: 2, color: Colors.red.shade200),
-                    ),
-                  ),
                 ),
               ),
               const SizedBox(
@@ -86,27 +83,6 @@ class PasswordApp extends StatelessWidget {
                 child: PasswordField(
                   color: Colors.blue,
                   passwordConstraint: r'.*[@$#.*].*',
-                  inputDecoration: PasswordDecoration(),
-                  // hintText: 'must have special characters',
-                  border: PasswordBorder(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.blue.shade100,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.blue.shade100,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide:
-                          BorderSide(width: 2, color: Colors.red.shade200),
-                    ),
-                  ),
                   errorMessage:
                       'must contain special character either . * @ # \$',
                 ),
@@ -126,25 +102,6 @@ class PasswordApp extends StatelessWidget {
 - A minimum length of 8 characters
                  ''',
                   hintText: 'Default password constraint ',
-                  inputDecoration: PasswordDecoration(
-                    inputPadding: const EdgeInsets.symmetric(horizontal: 20),
-                  ),
-                  border: PasswordBorder(
-                    border: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(width: 0, color: Colors.grey),
-                        borderRadius: BorderRadius.circular(25.7)),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(width: 0, color: Colors.grey),
-                      borderRadius: BorderRadius.circular(25.7),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(width: 0, color: Colors.grey),
-                      borderRadius: BorderRadius.circular(25.7),
-                    ),
-                  ),
                 ),
               ),
             ],

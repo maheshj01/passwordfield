@@ -1,7 +1,6 @@
 library passwordfield;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:passwordfield/src/password_bloc.dart';
 
 class PasswordField extends StatefulWidget {
@@ -9,7 +8,6 @@ class PasswordField extends StatefulWidget {
     Key? key,
     this.autoFocus = false,
     this.backgroundColor,
-    this.border,
     this.controller,
     this.color,
     this.errorMaxLines,
@@ -35,9 +33,6 @@ class PasswordField extends StatefulWidget {
   /// Background Color for the textfield (defaults to white)
   /// By default the backgroundColor is based on the current [Theme].
   final Color? backgroundColor;
-
-  /// Input Border for the passwordfield
-  final PasswordBorder? border;
 
   /// A controller for an editable passwordfield.
   final TextEditingController? controller;
@@ -125,18 +120,17 @@ class PasswordFieldState extends State<PasswordField> {
   }
 
   PasswordBloc bloc = PasswordBloc();
-  final underlineBorder = const UnderlineInputBorder();
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final defaultTextStyle = DefaultTextStyle.of(context).style;
-    widget.inputDecoration?.inputStyle ??= defaultTextStyle;
+
     return Theme(
-      data: ThemeData(
-        primaryColor: widget.color ?? Theme.of(context).primaryColor,
-        colorScheme: Theme.of(context)
-            .colorScheme
-            .copyWith(primary: widget.color ?? Theme.of(context).primaryColor),
+      data: theme.copyWith(
+        primaryColor: widget.color ?? theme.primaryColor,
+        colorScheme: theme.colorScheme
+            .copyWith(primary: widget.color ?? theme.primaryColor),
       ),
       child: StreamBuilder<String>(
         stream: bloc.password,
@@ -155,20 +149,6 @@ class PasswordFieldState extends State<PasswordField> {
                     ? widget.errorMessage ?? snapshot.error as String?
                     : null,
                 errorMaxLines: widget.errorMaxLines,
-                border: widget.border == null
-                    ? underlineBorder
-                    : widget.border?.border,
-                enabledBorder: widget.border == null
-                    ? underlineBorder
-                    : widget.border?.enabledBorder,
-                focusedBorder: widget.border == null
-                    ? underlineBorder
-                    : widget.border?.focusedBorder,
-                focusedErrorBorder: widget.border == null
-                    ? null
-                    : widget.border?.focusedErrorBorder,
-                errorBorder:
-                    widget.border == null ? null : widget.border!.errorBorder,
                 floatingLabelBehavior: widget.hasFloatingPlaceholder
                     ? FloatingLabelBehavior.auto
                     : FloatingLabelBehavior.never);
@@ -196,21 +176,6 @@ class PasswordFieldState extends State<PasswordField> {
                           widget.inputDecoration?.inputStyle,
                       labelStyle: widget.inputDecoration!.hintStyle ??
                           widget.inputDecoration!.inputStyle,
-                      border: widget.border == null
-                          ? underlineBorder
-                          : widget.border?.border,
-                      enabledBorder: widget.border == null
-                          ? underlineBorder
-                          : widget.border?.enabledBorder,
-                      focusedBorder: widget.border == null
-                          ? underlineBorder
-                          : widget.border?.focusedBorder,
-                      focusedErrorBorder: widget.border == null
-                          ? null
-                          : widget.border?.focusedErrorBorder,
-                      errorBorder: widget.border == null
-                          ? null
-                          : widget.border!.errorBorder,
                       counterText: '',
                       floatingLabelBehavior: widget.hasFloatingPlaceholder
                           ? FloatingLabelBehavior.auto
@@ -261,29 +226,4 @@ class PasswordDecoration extends InputDecoration {
 
   /// Icon used to unhide the password when touch in Contact with the icon
   final Icon? suffixIcon;
-}
-
-/// Consolidated Border class for the passwordfield
-/// when not in focus
-class PasswordBorder {
-  PasswordBorder(
-      {this.border,
-      this.focusedBorder,
-      this.enabledBorder,
-      this.focusedErrorBorder});
-
-  /// Input Border for the passwordfield when not in focus.
-  InputBorder? border;
-
-  ///  Input Border for the passwordfield when field is not disabled.
-  InputBorder? enabledBorder;
-
-  ///  Input Border for the passwordfield when field is unfocused and has error.
-  InputBorder? errorBorder;
-
-  ///  Input Border for the passwordfield when field is focused and has error.
-  InputBorder? focusedErrorBorder;
-
-  ///  Input Border for the passwordfield when in focus.
-  InputBorder? focusedBorder;
 }
