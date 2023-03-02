@@ -76,7 +76,7 @@ class PasswordField extends StatefulWidget {
   final Function(String)? onChanged;
 
   /// decoration for the input
-  PasswordDecoration? inputDecoration;
+  final PasswordDecoration? inputDecoration;
 
   ///
   /// RegEx pattern for the input password
@@ -204,7 +204,7 @@ class PasswordFieldState extends State<PasswordField> {
 
 /// Decoration class for the PasswordField to customize the input styling
 class PasswordDecoration extends InputDecoration {
-  PasswordDecoration(
+  const PasswordDecoration(
       {this.hintStyle,
       this.inputStyle,
       this.errorStyle,
@@ -216,7 +216,7 @@ class PasswordDecoration extends InputDecoration {
   final TextStyle? hintStyle;
 
   /// styling the Passwordfield Text
-  TextStyle? inputStyle;
+  final TextStyle? inputStyle;
 
   /// style for the the errorMessage
   final TextStyle? errorStyle;
