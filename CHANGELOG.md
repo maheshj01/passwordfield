@@ -1,6 +1,7 @@
 ## [0.2.0]- 12 June 2023
 
 - Migrate to flutter 3.0
+- renamed `inputDecoration` to `passwordDecoration`
 
 ## [0.1.0]- 18 September 2021
 
