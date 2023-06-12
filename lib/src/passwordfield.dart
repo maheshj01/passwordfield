@@ -1,7 +1,6 @@
 library passwordfield;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:passwordfield/src/password_bloc.dart';
 
 class PasswordField extends StatefulWidget {
@@ -17,7 +16,7 @@ class PasswordField extends StatefulWidget {
     this.floatingText = 'Password',
     this.hasFloatingPlaceholder = false,
     this.hintText = 'Password',
-    this.inputDecoration,
+    this.passwordDecoration,
     this.maxLength,
     this.onSubmit,
     this.onChanged,
@@ -45,9 +44,9 @@ class PasswordField extends StatefulWidget {
   /// changes the primary color of the PasswordField
   final Color? color;
 
-  /// The maximum number of lines the [errorText] can occupy.
+  /// The maximum number of lines the [errorMessage] can occupy.
   ///
-  /// Defaults to null, which means that the [errorText] will be limited
+  /// Defaults to null, which means that the [errorMessage] will be limited
   /// to a single line with [TextOverflow.ellipsis].
   final int? errorMaxLines;
 
@@ -58,7 +57,7 @@ class PasswordField extends StatefulWidget {
   /// a text label floats to left top on focus
   /// The label defaults to "Password" if not specified,
   ///
-  /// floating text can be styled using [hintStyle]
+  /// floating text can be styled using [PasswordDecoration.hintStyle]
   ///
   /// Note: either [floatingText]/ [hintText] can be shown at a time
   /// that mainly depends on property [hasFloatingPlaceholder]
@@ -81,7 +80,7 @@ class PasswordField extends StatefulWidget {
   final Function(String)? onChanged;
 
   /// decoration for the input
-  PasswordDecoration? inputDecoration;
+  final PasswordDecoration? passwordDecoration;
 
   ///
   /// RegEx pattern for the input password
@@ -130,7 +129,7 @@ class PasswordFieldState extends State<PasswordField> {
   @override
   Widget build(BuildContext context) {
     final defaultTextStyle = DefaultTextStyle.of(context).style;
-    widget.inputDecoration?.inputStyle ??= defaultTextStyle;
+    widget.passwordDecoration?.inputStyle ??= defaultTextStyle;
     return Theme(
       data: ThemeData(
         primaryColor: widget.color ?? Theme.of(context).primaryColor,
@@ -179,23 +178,23 @@ class PasswordFieldState extends State<PasswordField> {
               controller: widget.controller,
               obscureText: obscureText,
               autofocus: widget.autoFocus!,
-              decoration: widget.inputDecoration == null
+              decoration: widget.passwordDecoration == null
                   ? _buildDefaultInputDecoration()
-                  : widget.inputDecoration!.copyWith(
+                  : widget.passwordDecoration!.copyWith(
                       fillColor: widget.backgroundColor,
                       filled: widget.backgroundColor != null,
-                      contentPadding: widget.inputDecoration!.inputPadding,
+                      contentPadding: widget.passwordDecoration!.inputPadding,
                       errorText: snapshot.hasError
                           ? widget.errorMessage ?? snapshot.error as String?
                           : null,
                       errorMaxLines: widget.errorMaxLines,
-                      errorStyle: widget.inputDecoration!.errorStyle ??
+                      errorStyle: widget.passwordDecoration!.errorStyle ??
                           defaultTextStyle.copyWith(color: Colors.red),
                       hintText: widget.hintText,
-                      hintStyle: widget.inputDecoration?.hintStyle ??
-                          widget.inputDecoration?.inputStyle,
-                      labelStyle: widget.inputDecoration!.hintStyle ??
-                          widget.inputDecoration!.inputStyle,
+                      hintStyle: widget.passwordDecoration?.hintStyle ??
+                          widget.passwordDecoration?.inputStyle,
+                      labelStyle: widget.passwordDecoration!.hintStyle ??
+                          widget.passwordDecoration!.inputStyle,
                       border: widget.border == null
                           ? underlineBorder
                           : widget.border?.border,
@@ -219,12 +218,12 @@ class PasswordFieldState extends State<PasswordField> {
                           ? widget.floatingText ?? widget.hintText
                           : widget.hintText,
                       suffixIcon: GestureDetector(
-                        child: widget.inputDecoration!.suffixIcon,
+                        child: widget.passwordDecoration!.suffixIcon,
                         onTapDown: inContact,
                         onTapUp: outContact,
                       )),
               onSubmitted: widget.onSubmit,
-              style: widget.inputDecoration?.inputStyle,
+              style: widget.passwordDecoration?.inputStyle,
               onChanged: (text) {
                 bloc.onPasswordChanged(widget.passwordConstraint, text);
                 if (widget.onChanged != null) {

@@ -49,7 +49,7 @@ class PasswordApp extends StatelessWidget {
                   errorMessage:
                       'required at least 1 letter and number 5+ chars',
                   passwordConstraint: r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$',
-                  inputDecoration: PasswordDecoration(
+                  passwordDecoration: PasswordDecoration(
                     inputPadding: const EdgeInsets.symmetric(horizontal: 10),
                     suffixIcon: const Icon(
                       Icons.not_accessible,
@@ -86,7 +86,7 @@ class PasswordApp extends StatelessWidget {
                 child: PasswordField(
                   color: Colors.blue,
                   passwordConstraint: r'.*[@$#.*].*',
-                  inputDecoration: PasswordDecoration(),
+                  passwordDecoration: PasswordDecoration(),
                   // hintText: 'must have special characters',
                   border: PasswordBorder(
                     border: OutlineInputBorder(
@@ -126,7 +126,7 @@ class PasswordApp extends StatelessWidget {
 - A minimum length of 8 characters
                  ''',
                   hintText: 'Default password constraint ',
-                  inputDecoration: PasswordDecoration(
+                  passwordDecoration: PasswordDecoration(
                     inputPadding: const EdgeInsets.symmetric(horizontal: 20),
                   ),
                   border: PasswordBorder(

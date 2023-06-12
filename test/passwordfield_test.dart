@@ -55,7 +55,7 @@ void main() {
           key: const Key('passwordFieldKey'),
           errorMessage: errorMessage,
           passwordConstraint: regexpattern,
-          inputDecoration: PasswordDecoration(
+          passwordDecoration: PasswordDecoration(
             inputStyle: const TextStyle(
               fontSize: 14,
             ),
@@ -80,7 +80,7 @@ void main() {
         key: const Key('passwordFieldKey'),
         errorMessage: errorMessage,
         passwordConstraint: regexpattern,
-        inputDecoration: PasswordDecoration(
+        passwordDecoration: PasswordDecoration(
           inputStyle: const TextStyle(
             fontSize: 14,
           ),
@@ -105,7 +105,7 @@ void main() {
         key: const Key('passwordFieldKey'),
         errorMessage: errorMessage,
         passwordConstraint: regexpattern,
-        inputDecoration: PasswordDecoration(
+        passwordDecoration: PasswordDecoration(
           inputStyle: const TextStyle(
             fontSize: 14,
           ),
@@ -129,7 +129,7 @@ void main() {
           key: const Key('passwordFieldKey'),
           errorMessage: errorMessage,
           passwordConstraint: regexpattern,
-          inputDecoration: PasswordDecoration(
+          passwordDecoration: PasswordDecoration(
             inputStyle: const TextStyle(
               fontSize: 14,
             ),
@@ -154,7 +154,7 @@ void main() {
           maxLength: maxLength,
           passwordConstraint: regexpattern,
           controller: controller,
-          inputDecoration: PasswordDecoration(
+          passwordDecoration: PasswordDecoration(
             inputStyle: const TextStyle(
               fontSize: 14,
             ),
