@@ -1,6 +1,6 @@
-#  passwordfield: [^0.1.0](https://pub.dev/packages/passwordfield) 
+#  passwordfield: [^0.2.0](https://pub.dev/packages/passwordfield) 
 
-
+<a href="https://pub.dev/packages/passwordfield"><img src="https://img.shields.io/pub/v/passwordfield.svg" alt="Pub"></a>
 
 A simple and easy to use flutter package to add a passwordfield to your Flutter project.
 
@@ -10,8 +10,7 @@ A simple and easy to use flutter package to add a passwordfield to your Flutter 
 
 - Add the dependency
 ```
-dependencies:
-  passwordfield: ^0.1.0
+flutter pub add passwordfield
 ```
 - Import the package
 
