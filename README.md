@@ -40,7 +40,7 @@ PasswordField();
 PasswordField(
   color: Colors.blue,
   passwordConstraint: r'.*[@$#.*].*',
-  inputDecoration: PasswordDecoration(),
+  passwordDecoration: PasswordDecoration(),
   hintText: 'must have special characters',
   border: PasswordBorder(
     border: OutlineInputBorder(
@@ -97,7 +97,7 @@ PasswordField(
 - A minimum length of 8 characters
  ''',
   hintText: 'Default password constraint ',
-  inputDecoration: PasswordDecoration(
+  passwordDecoration: PasswordDecoration(
     inputPadding: const EdgeInsets.symmetric(horizontal: 20),
   ),
   border: PasswordBorder(
@@ -149,7 +149,7 @@ PasswordField(
 
 ```final String hintText```:  default text to show on the passwordfield when it is empty
 
-```PasswordDecoration inputDecoration```: Decoration class for the PasswordField to customize the input styling
+```PasswordDecoration passwordDecoration```: Decoration class for the PasswordField to customize the input styling
 
 ```int maxLength```: the max number of characters the password field can support
   
